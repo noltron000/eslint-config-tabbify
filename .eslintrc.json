@@ -1,273 +1,646 @@
 {
 	"rules": {
 		/* FIXES FOR POSSIBLE PROBLEMS */
+		// NOTE: This rule can report false-positives.
 		"array-callback-return": ["off"],
-		"constructor-super": ["off"],
-		"for-direction": ["off"],
-		"getter-return": ["off"],
-		"no-async-promise-executor": ["off"],
-		"no-await-in-loop": ["off"],
-		"no-class-assign": ["off"],
-		"no-compare-neg-zero": ["off"],
-		"no-cond-assign": ["off"],
-		"no-const-assign": ["off"],
-		"no-constant-binary-expression": ["off"],
-		"no-constant-condition": ["off"],
-		"no-constructor-return": ["off"],
-		"no-control-regex": ["off"],
-		"no-debugger": ["off"],
-		"no-dupe-args": ["off"],
-		"no-dupe-class-members": ["off"],
-		"no-dupe-else-if": ["off"],
-		"no-dupe-keys": ["off"],
-		"no-duplicate-case": ["off"],
-		"no-duplicate-imports": ["off"],
-		"no-empty-character-class": ["off"],
-		"no-empty-pattern": ["off"],
-		"no-ex-assign": ["off"],
-		"no-fallthrough": ["off"],
-		"no-func-assign": ["off"],
-		"no-import-assign": ["off"],
-		"no-inner-declarations": ["off"],
-		"no-invalid-regexp": ["off"],
-		"no-irregular-whitespace": ["off"],
-		"no-loss-of-precision": ["off"],
-		"no-misleading-character-class": ["off"],
-		"no-new-symbol": ["off"],
-		"no-obj-calls": ["off"],
-		"no-promise-executor-return": ["off"],
-		"no-prototype-builtins": ["off"],
-		"no-self-assign": ["off"],
-		"no-self-compare": ["off"],
-		"no-setter-return": ["off"],
-		"no-sparse-arrays": ["off"],
-		"no-template-curly-in-string": ["off"],
-		"no-this-before-super": ["off"],
-		"no-undef": ["off"],
-		"no-unexpected-multiline": ["off"],
-		"no-unmodified-loop-condition": ["off"],
-		"no-unreachable": ["off"],
-		"no-unreachable-loop": ["off"],
-		"no-unsafe-finally": ["off"],
-		"no-unsafe-negation": ["off"],
-		"no-unsafe-optional-chaining": ["off"],
-		"no-unused-private-class-members": ["off"],
-		"no-unused-vars": ["off"],
-		"no-use-before-define": ["off"],
-		"no-useless-backreference": ["off"],
-		"require-atomic-updates": ["off"],
-		"use-isnan": ["off"],
-		"valid-typeof": ["off"],
+
+		"constructor-super": ["error"],
+		"for-direction": ["error"],
+		"getter-return": ["error"],
+		"no-async-promise-executor": ["error"],
+
+		// NOTE: Sometimes its useful to have "await" in a loop.
+		"no-await-in-loop": ["warn"],
+
+		"no-class-assign": ["error"],
+		"no-compare-neg-zero": ["error"],
+		"no-cond-assign": ["error"],
+		"no-const-assign": ["error"],
+		"no-constant-binary-expression": ["error"],
+
+		// NOTE: It can be useful to use "while (true)" loops.
+		"no-constant-condition": [
+		"error",
+			{"checkLoops": false}
+		],
+
+		// NOTE: Returning in a constructor can be intentional.
+		"no-constructor-return": ["warn"],
+
+		"no-control-regex": ["error"],
+		"no-debugger": ["error"],
+		"no-dupe-args": ["error"],
+		"no-dupe-class-members": ["error"],
+		"no-dupe-else-if": ["error"],
+		"no-dupe-keys": ["error"],
+		"no-duplicate-case": ["error"],
+		"no-duplicate-imports": ["error"],
+		"no-empty-character-class": ["error"],
+		"no-empty-pattern": ["error"],
+		"no-ex-assign": ["error"],
+		"no-fallthrough": ["error"],
+		"no-func-assign": ["error"],
+		"no-import-assign": ["error"],
+
+		// NOTE: Clean out certain hoisted patterns.
+		"no-inner-declarations": [
+			"error",
+			"both"
+		],
+
+		"no-invalid-regexp": ["error"],
+		"no-irregular-whitespace": ["error"],
+		"no-loss-of-precision": ["error"],
+		"no-misleading-character-class": ["error"],
+		"no-new-symbol": ["error"],
+		"no-obj-calls": ["error"],
+		"no-promise-executor-return": ["error"],
+		"no-prototype-builtins": ["error"],
+		"no-self-assign": ["error"],
+		"no-self-compare": ["error"],
+		"no-setter-return": ["error"],
+		"no-sparse-arrays": ["error"],
+		"no-template-curly-in-string": ["error"],
+		"no-this-before-super": ["error"],
+
+		// NOTE: Prevent using global vars without tagging them.
+		"no-undef": [
+			"error",
+			{"typeof": true}
+		],
+
+		"no-unexpected-multiline": ["error"],
+		"no-unmodified-loop-condition": ["error"],
+		"no-unreachable": ["error"],
+		"no-unreachable-loop": ["error"],
+		"no-unsafe-finally": ["error"],
+
+		// NOTE: Check for unclear negation with relational operators.
+		"no-unsafe-negation": [
+			"error",
+			{"enforceForOrderingRelations": true}
+		],
+
+		// NOTE: Disallow some ambiguous math resulting in "NaN".
+		"no-unsafe-optional-chaining": [
+			"error",
+			{"disallowArithmeticOperators": true}
+		],
+
+		"no-unused-private-class-members": ["error"],
+
+		// NOTE: Allow omission of properties from a spread object.
+		"no-unused-vars": [
+			"error",
+			{"ignoreRestSiblings": true}
+		],
+
+		"no-use-before-define": ["error"],
+		"no-useless-backreference": ["error"],
+		"require-atomic-updates": ["error"],
+		"use-isnan": ["error"],
+		"valid-typeof": ["error"],
 
 		/* RULES FOR ALTERNATE SUGGESTIONS */
-		"accessor-pairs": ["off"],
-		"arrow-body-style": ["off"],
-		"block-scoped-var": ["off"],
-		"camelcase": ["off"],
+		"accessor-pairs": ["error"],
+		"arrow-body-style": ["error"],
+		"block-scoped-var": ["error"],
+		"camelcase": ["error"],
+
+		// NOTE: This one was excessively annoying!
 		"capitalized-comments": ["off"],
-		"class-methods-use-this": ["off"],
-		"complexity": ["off"],
-		"consistent-return": ["off"],
-		"consistent-this": ["off"],
-		"curly": ["off"],
+
+		"class-methods-use-this": ["error"],
+		"complexity": ["error"],
+		"consistent-return": ["error"],
+		"consistent-this": ["error"],
+
+		// NOTE: This one is important to get right.
+		"curly": [
+			"error",
+			"multi-line",
+			"consistent"
+		],
+
+		// NOTE: Don't mess with default cases.
 		"default-case": ["off"],
 		"default-case-last": ["off"],
-		"default-param-last": ["off"],
-		"dot-notation": ["off"],
-		"eqeqeq": ["off"],
-		"func-name-matching": ["off"],
-		"func-names": ["off"],
-		"func-style": ["off"],
-		"grouped-accessor-pairs": ["off"],
-		"guard-for-in": ["off"],
+
+		"default-param-last": ["error"],
+		"dot-notation": ["error"],
+
+		// NOTE: Use triple equals except when comparing null loosely.
+		"eqeqeq": [
+			"error",
+			"always",
+			{"null": "ignore"}
+		],
+
+		"func-name-matching": ["error"],
+
+		// NOTE: should use "const x = function(){...}"
+		"func-names": [
+			"error",
+			"never"
+		],
+
+		"func-style": ["error"],
+
+		// NOTE: Gets & Sets paired together?
+		"grouped-accessor-pairs": [
+			"error",
+			"getBeforeSet"
+		],
+
+		"guard-for-in": ["error"],
+
+		// NOTE: No need to restrict variable names.
 		"id-denylist": ["off"],
-		"id-length": ["off"],
+
+		"id-length": ["error"],
+
+		// NOTE: Already using camelCase.
 		"id-match": ["off"],
+
+		// NOTE: Allows gated declarations "let x; if (y) x=4".
 		"init-declarations": ["off"],
-		"max-classes-per-file": ["off"],
-		"max-depth": ["off"],
-		"max-lines": ["off"],
-		"max-lines-per-function": ["off"],
-		"max-nested-callbacks": ["off"],
-		"max-params": ["off"],
-		"max-statements": ["off"],
+
+		// NOTE: Enforces arbitrary maxes of certain patterns.
+		"max-classes-per-file": [
+			"error",
+			// Default 1
+			{"max": 1}
+		],
+
+		"max-depth": [
+			"error",
+			// Default 4
+			{"max": 6}
+		],
+
+		"max-lines": [
+			"error",
+			// Default 300
+			{"max": 300}
+		],
+
+		"max-lines-per-function": [
+			"error",
+			// Default 50
+			{"max": 60}
+		],
+
+		"max-nested-callbacks": [
+			"error",
+			// Default 10
+			{"max": 6}
+		],
+
+		"max-params": [
+			"error",
+			// Default 3
+			{"max": 3}
+		],
+
+		"max-statements": [
+			"error",
+			// Default 10
+			{"max": 30}
+		],
+
+		// NOTE: None of the settings are really attractive.
 		"multiline-comment-style": ["off"],
-		"new-cap": ["off"],
-		"no-alert": ["off"],
-		"no-array-constructor": ["off"],
-		"no-bitwise": ["off"],
-		"no-caller": ["off"],
-		"no-case-declarations": ["off"],
-		"no-confusing-arrow": ["off"],
-		"no-console": ["off"],
-		"no-continue": ["off"],
-		"no-delete-var": ["off"],
+
+		"new-cap": ["error"],
+		"no-alert": ["error"],
+		"no-array-constructor": ["error"],
+		"no-bitwise": ["error"],
+		"no-caller": ["error"],
+		"no-case-declarations": ["error"],
+		"no-confusing-arrow": ["error"],
+
+		// NOTE: Keep some console methods, but log is evil!
+		"no-console": [
+			"error",
+			{"allow": ["clear", "info", "warn", "error", "table"]}
+		],
+
+		"no-continue": ["error"],
+		"no-delete-var": ["error"],
+
+		// NOTE: Doesn't seem helpful.
 		"no-div-regex": ["off"],
 		"no-else-return": ["off"],
-		"no-empty": ["off"],
-		"no-empty-function": ["off"],
+
+		"no-empty": ["error"],
+		"no-empty-function": ["error"],
+
+		// NOTE: Use "eqeqeq" instead.
 		"no-eq-null": ["off"],
-		"no-eval": ["off"],
-		"no-extend-native": ["off"],
-		"no-extra-bind": ["off"],
-		"no-extra-boolean-cast": ["off"],
-		"no-extra-label": ["off"],
-		"no-extra-semi": ["off"],
-		"no-floating-decimal": ["off"],
-		"no-global-assign": ["off"],
-		"no-implicit-coercion": ["off"],
-		"no-implicit-globals": ["off"],
-		"no-implied-eval": ["off"],
+
+		"no-eval": ["error"],
+		"no-extend-native": ["error"],
+		"no-extra-bind": ["error"],
+		"no-extra-boolean-cast": ["error"],
+		"no-extra-label": ["error"],
+		"no-extra-semi": ["error"],
+		"no-floating-decimal": ["error"],
+		"no-global-assign": ["error"],
+
+		// NOTE: Boolean coercion is fine.
+		"no-implicit-coercion": [
+			"error",
+			{"boolean": false}
+		],
+
+		"no-implicit-globals": ["error"],
+		"no-implied-eval": ["error"],
+
+		// NOTE: Wow dumb
 		"no-inline-comments": ["off"],
-		"no-invalid-this": ["off"],
-		"no-iterator": ["off"],
-		"no-label-var": ["off"],
+
+		"no-invalid-this": ["error"],
+		"no-iterator": ["error"],
+		"no-label-var": ["error"],
+
+		// NOTE: Labels can be used to break parent statements.
 		"no-labels": ["off"],
-		"no-lone-blocks": ["off"],
-		"no-lonely-if": ["off"],
-		"no-loop-func": ["off"],
+
+		"no-lone-blocks": ["error"],
+		"no-lonely-if": ["error"],
+		"no-loop-func": ["error"],
+
+		// NOTE: This turned out to be supremely annoying.
 		"no-magic-numbers": ["off"],
-		"no-mixed-operators": ["off"],
-		"no-multi-assign": ["off"],
-		"no-multi-str": ["off"],
-		"no-negated-condition": ["off"],
+
+		"no-mixed-operators": ["error"],
+		"no-multi-assign": ["error"],
+		"no-multi-str": ["error"],
+		"no-negated-condition": ["error"],
+
+		// NOTE: I like nested ternaries.
 		"no-nested-ternary": ["off"],
+
+		// NOTE: We use new.
 		"no-new": ["off"],
-		"no-new-func": ["off"],
-		"no-new-object": ["off"],
-		"no-new-wrappers": ["off"],
-		"no-nonoctal-decimal-escape": ["off"],
-		"no-octal": ["off"],
-		"no-octal-escape": ["off"],
-		"no-param-reassign": ["off"],
-		"no-plusplus": ["off"],
-		"no-proto": ["off"],
-		"no-redeclare": ["off"],
-		"no-regex-spaces": ["off"],
+
+		"no-new-func": ["error"],
+		"no-new-object": ["error"],
+		"no-new-wrappers": ["error"],
+		"no-nonoctal-decimal-escape": ["error"],
+		"no-octal": ["error"],
+		"no-octal-escape": ["error"],
+
+		// NOTE: Strictly disallow parameters to be reassigned.
+		"no-param-reassign": [
+			"error",
+			{"props": true}
+		],
+
+		"no-plusplus": ["error"],
+		"no-proto": ["error"],
+		"no-redeclare": ["error"],
+		"no-regex-spaces": ["error"],
+
+		// NOTE: Nothing to restrict here.
 		"no-restricted-exports": ["off"],
 		"no-restricted-globals": ["off"],
 		"no-restricted-imports": ["off"],
 		"no-restricted-properties": ["off"],
 		"no-restricted-syntax": ["off"],
-		"no-return-assign": ["off"],
+
+		"no-return-assign": ["error"],
+
+		// NOTE: We expect to await items in async.
 		"no-return-await": ["off"],
-		"no-script-url": ["off"],
-		"no-sequences": ["off"],
-		"no-shadow": ["off"],
-		"no-shadow-restricted-names": ["off"],
+
+		"no-script-url": ["error"],
+		"no-sequences": ["error"],
+		"no-shadow": ["error"],
+		"no-shadow-restricted-names": ["error"],
+
+		// NOTE: Ternaries are nice.
 		"no-ternary": ["off"],
-		"no-throw-literal": ["off"],
+
+		"no-throw-literal": ["error"],
+
+		// NOTE: MEH.
 		"no-undef-init": ["off"],
 		"no-undefined": ["off"],
 		"no-underscore-dangle": ["off"],
-		"no-unneeded-ternary": ["off"],
-		"no-unused-expressions": ["off"],
-		"no-unused-labels": ["off"],
-		"no-useless-call": ["off"],
-		"no-useless-catch": ["off"],
-		"no-useless-computed-key": ["off"],
-		"no-useless-concat": ["off"],
-		"no-useless-constructor": ["off"],
-		"no-useless-escape": ["off"],
-		"no-useless-rename": ["off"],
-		"no-useless-return": ["off"],
-		"no-var": ["off"],
+
+		"no-unneeded-ternary": ["error"],
+
+		// NOTE: Allow expressions which cause side-effects.
+		"no-unused-expressions": [
+			"error",
+			{"allowShortCircuit": true, "allowTernary": true}
+		],
+
+		"no-unused-labels": ["error"],
+		"no-useless-call": ["error"],
+		"no-useless-catch": ["error"],
+		"no-useless-computed-key": ["error"],
+		"no-useless-concat": ["error"],
+		"no-useless-constructor": ["error"],
+		"no-useless-escape": ["error"],
+		"no-useless-rename": ["error"],
+		"no-useless-return": ["error"],
+		"no-var": ["error"],
+
+		// NOTE: We use void to show purposefully unawaited async calls.
 		"no-void": ["off"],
+
+		// NOTE: Useless
 		"no-warning-comments": ["off"],
-		"no-with": ["off"],
-		"object-shorthand": ["off"],
-		"one-var": ["off"],
-		"one-var-declaration-per-line": ["off"],
-		"operator-assignment": ["off"],
-		"prefer-arrow-callback": ["off"],
-		"prefer-const": ["off"],
-		"prefer-destructuring": ["off"],
-		"prefer-exponentiation-operator": ["off"],
-		"prefer-named-capture-group": ["off"],
-		"prefer-numeric-literals": ["off"],
-		"prefer-object-has-own": ["off"],
-		"prefer-object-spread": ["off"],
-		"prefer-promise-reject-errors": ["off"],
-		"prefer-regex-literals": ["off"],
-		"prefer-rest-params": ["off"],
-		"prefer-spread": ["off"],
-		"prefer-template": ["off"],
-		"quote-props": ["off"],
-		"radix": ["off"],
-		"require-await": ["off"],
-		"require-unicode-regexp": ["off"],
-		"require-yield": ["off"],
-		"sort-imports": ["off"],
+
+		"no-with": ["error"],
+
+		// NOTE: the record object should be consistent!
+		"object-shorthand": [
+			"error",
+			"consistent-as-needed"
+		],
+
+		// NOTE: Simpler to read
+		"one-var": [
+			"error",
+			"never"
+		],
+
+		// NOTE: Also simpler here
+		"one-var-declaration-per-line": [
+			"error",
+			"always"
+		],
+
+		"operator-assignment": ["error"],
+		"prefer-arrow-callback": ["error"],
+		"prefer-const": ["error"],
+		"prefer-destructuring": ["error"],
+		"prefer-exponentiation-operator": ["error"],
+		"prefer-named-capture-group": ["error"],
+		"prefer-numeric-literals": ["error"],
+		"prefer-object-has-own": ["error"],
+		"prefer-object-spread": ["error"],
+		"prefer-promise-reject-errors": ["error"],
+		"prefer-regex-literals": ["error"],
+		"prefer-rest-params": ["error"],
+		"prefer-spread": ["error"],
+		"prefer-template": ["error"],
+
+		// NOTICE
+		// Props shouldn't have quotes if not needed.
+		// They should be consistent if they are, however.
+		"quote-props": [
+			"error",
+			"consistent-as-needed"
+		],
+
+		// NOTE: Don't complicate parseInt unless its needed.
+		"radix": [
+			"error",
+			"as-needed"
+		],
+
+		"require-await": ["error"],
+		"require-unicode-regexp": ["error"],
+		"require-yield": ["error"],
+		"sort-imports": ["error"],
+
+		// NOTE: Its better if related values stay together.
 		"sort-keys": ["off"],
 		"sort-vars": ["off"],
-		"spaced-comment": ["off"],
-		"strict": ["off"],
-		"symbol-description": ["off"],
-		"vars-on-top": ["off"],
-		"yoda": ["off"],
+
+		// NOTE: Should have spaced block comments as well.
+		"spaced-comment": [
+			"error",
+			"always",
+			{"block": {"balanced": true}}
+		],
+
+		"strict": ["error"],
+		"symbol-description": ["error"],
+		"vars-on-top": ["error"],
+		"yoda": ["error"],
 
 		/* STYLISTIC FIXES FOR LAYOUT & FORMATTING */
-		"array-bracket-newline": ["off"],
-		"array-bracket-spacing": ["off"],
-		"array-element-newline": ["off"],
-		"arrow-parens": ["off"],
-		"arrow-spacing": ["off"],
-		"block-spacing": ["off"],
-		"brace-style": ["off"],
-		"comma-dangle": ["off"],
-		"comma-spacing": ["off"],
-		"comma-style": ["off"],
-		"computed-property-spacing": ["off"],
-		"dot-location": ["off"],
-		"eol-last": ["off"],
-		"func-call-spacing": ["off"],
-		"function-call-argument-newline": ["off"],
-		"function-paren-newline": ["off"],
-		"generator-star-spacing": ["off"],
-		"implicit-arrow-linebreak": ["off"],
-		"indent": ["off"],
-		"jsx-quotes": ["off"],
-		"key-spacing": ["off"],
-		"keyword-spacing": ["off"],
+		// NOTE: Seperate brackets if there are any newlines.
+		"array-bracket-newline": [
+			"error",
+			{"multiline": true}
+		],
+
+		// NOTE: Always use spacing between ( ), [ ], and { }.
+		"array-bracket-spacing": [
+			"error",
+			"always"
+		],
+
+		// NOTE: Seperate elements if there are any newlines.
+		"array-element-newline": [
+			"error",
+			{"multiline": true}
+		],
+
+		"arrow-parens": ["error"],
+		"arrow-spacing": ["error"],
+		"block-spacing": ["error"],
+
+		// NOTE: OPINION: Stroustrup is the best brace style.
+		"brace-style": [
+			"error",
+			"stroustrup"
+		],
+
+		// NOTE: This is best for diff churn.
+		"comma-dangle": [
+			"error",
+			"always-multiline"
+		],
+
+		"comma-spacing": ["error"],
+		"comma-style": ["error"],
+
+		// NOTE: Always use spacing between ( ), [ ], and { }.
+		"computed-property-spacing": [
+			"error",
+			"always"
+		],
+
+		// NOTE: Start newlines with operators where applicable.
+		"dot-location": [
+			"error",
+			"property"
+		],
+
+		"eol-last": ["error"],
+		"func-call-spacing": ["error"],
+
+		"function-call-argument-newline": [
+			"error",
+			"consistent"
+		],
+
+		// NOTE: Seperate parens if there are any newlines.
+		"function-paren-newline": [
+			"error",
+			"multiline"
+		],
+
+		// NOTE: Space it like you would "async"
+		"generator-star-spacing": [
+			"error",
+			"both"
+		],
+
+		"implicit-arrow-linebreak": ["error"],
+
+		// NOTE: We use tabs! Don't indent member expressions!
+		"indent": [
+			"error",
+			"tab",
+			{"SwitchCase": 1, "MemberExpression": 0}
+		],
+
+		// NOTE: Prefer single-quotes wherever possible!
+		"jsx-quotes": [
+			"error",
+			"prefer-single"
+		],
+
+		"key-spacing": ["error"],
+		"keyword-spacing": ["error"],
+
+		// NOTE: Nope.
 		"line-comment-position": ["off"],
-		"linebreak-style": ["off"],
+
+		"linebreak-style": ["error"],
+
+		// NOTE: Nope again.
 		"lines-around-comment": ["off"],
-		"lines-between-class-members": ["off"],
-		"max-len": ["off"],
-		"max-statements-per-line": ["off"],
-		"multiline-ternary": ["off"],
-		"new-parens": ["off"],
-		"newline-per-chained-call": ["off"],
-		"no-extra-parens": ["off"],
-		"no-mixed-spaces-and-tabs": ["off"],
-		"no-multi-spaces": ["off"],
-		"no-multiple-empty-lines": ["off"],
+
+		"lines-between-class-members": ["error"],
+
+		// NOTE: Intentionally aggressive.
+		"max-len": [
+			"error",
+			{"code": 60, "tabWidth": 2}
+		],
+
+		"max-statements-per-line": ["error"],
+
+		// NOTE: Use multiline ternaries if there's newlines.
+		"multiline-ternary": [
+			"error",
+			"always-multiline"
+		],
+
+		"new-parens": ["error"],
+		"newline-per-chained-call": ["error"],
+		"no-extra-parens": ["error"],
+		"no-mixed-spaces-and-tabs": ["error"],
+		"no-multi-spaces": ["error"],
+
+		// NOTE: Double-newlines are good for seperating stuff.
+		"no-multiple-empty-lines": [
+			"error",
+			{ "max": 2, "maxBOF": 0, "maxEOF": 0 }
+		],
+
+		// NOTE: LOL
 		"no-tabs": ["off"],
-		"no-trailing-spaces": ["off"],
-		"no-whitespace-before-property": ["off"],
-		"nonblock-statement-body-position": ["off"],
-		"object-curly-newline": ["off"],
-		"object-curly-spacing": ["off"],
+
+		"no-trailing-spaces": ["error"],
+		"no-whitespace-before-property": ["error"],
+		"nonblock-statement-body-position": ["error"],
+
+		// NOTE: Seperate curlies if there are any newlines.
+		"object-curly-newline": [
+			"error",
+			{"multiline": true}
+		],
+
+		// NOTE: Always use spacing between ( ), [ ], and { }.
+		"object-curly-spacing": [
+			"error",
+			"always"
+		],
+
+		// NOTE: We have other rules that cover for this.
 		"object-property-newline": ["off"],
-		"operator-linebreak": ["off"],
-		"padded-blocks": ["off"],
+
+		// NOTE: Start lines with operators where applicable.
+		"operator-linebreak": [
+			"error",
+			"before"
+		],
+
+		// NOTE: gross.
+		"padded-blocks": [
+			"error",
+			"never"
+		],
+
+		// NOTE: Not worth configuring
 		"padding-line-between-statements": ["off"],
-		"quotes": ["off"],
-		"rest-spread-spacing": ["off"],
-		"semi": ["off"],
-		"semi-spacing": ["off"],
-		"semi-style": ["off"],
-		"space-before-blocks": ["off"],
-		"space-before-function-paren": ["off"],
-		"space-in-parens": ["off"],
-		"space-infix-ops": ["off"],
-		"space-unary-ops": ["off"],
-		"switch-colon-spacing": ["off"],
-		"template-curly-spacing": ["off"],
-		"template-tag-spacing": ["off"],
-		"unicode-bom": ["off"],
-		"wrap-iife": ["off"],
-		"wrap-regex": ["off"],
-		"yield-star-spacing": ["off"]
+
+		// NOTE: Single Quotes FTW
+		"quotes": [
+			"error",
+			"single"
+		],
+
+		"rest-spread-spacing": ["error"],
+
+		// NOTE: Ew.
+		"semi": [
+			"error",
+			"never",
+			{"beforeStatementContinuationChars": "never"}
+		],
+
+		"semi-spacing": ["error"],
+		"semi-style": ["error"],
+		"space-before-blocks": ["error"],
+		"space-before-function-paren": ["error"],
+
+		// NOTE: Always use spacing between ( ), [ ], and { }.
+		"space-in-parens": [
+			"error",
+			"always"
+		],
+
+		"space-infix-ops": ["error"],
+		"space-unary-ops": ["error"],
+		"switch-colon-spacing": ["error"],
+
+		// NOTE: Always use spacing between ( ), [ ], and { }.
+		"template-curly-spacing": [
+			"error",
+			"always"
+		],
+
+		// NOTE: Tags are like "gql`Query {...`", no spaces.
+		"template-tag-spacing": [
+			"error",
+			"never"
+		],
+
+		"unicode-bom": ["error"],
+
+		// NOTE: Inside option causes better readability.
+		"wrap-iife": [
+			"error",
+			"inside"
+		],
+
+		"wrap-regex": ["error"],
+
+		// NOTE: Consistent with "generator-star-spacing"
+		"yield-star-spacing": [
+			"error",
+			"both"
+		]
 	}
 }
