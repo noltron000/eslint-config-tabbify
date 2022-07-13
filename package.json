@@ -1,0 +1,38 @@
+{
+	"name": "eslint-config-tabbify",
+	"private": false,
+	"license": "MIT",
+	"version": "0.0.0",
+	"description": "Base linter configs for the opinionated JavaScript style guide, Tabbify.",
+	"keywords": [
+		"ESLint",
+		"config",
+		"tabbify",
+		"tabs",
+		"comprehensive",
+		"JavaScript"
+	],
+	"homepage": "https://github.com/tabbify/eslint-config-tabbify#README.md",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tabbify/eslint-config-tabbify.git"
+	},
+	"bugs": {
+		"url": "https://github.com/tabbify/eslint-config-tabbify/issues",
+		"email": "noltron000@gmail.com"
+	},
+	"author": {
+		"name": "noltron000",
+		"email": "noltron000@gmail.com",
+		"url": "https://noltron000.com/"
+	},
+	"contributors": [],
+	"packageManager": "yarn@3.2.1",
+	"main": ".eslintrc.json",
+	"type": "commonjs",
+	"dependencies": {},
+	"devDependencies": {},
+	"peerDependencies": {
+		"eslint": ">=8"
+	}
+}
