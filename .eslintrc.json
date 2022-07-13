@@ -89,10 +89,13 @@
 
 		"no-unused-private-class-members": ["error"],
 
-		// NOTE: Allow omission of properties from a spread object.
+		// NOTE:
+		// Allow omission of properties from a spread object.
+		// Also, sometimes its good to explicitly set expected args,
+		// 	even if they remain unused in the function's body.
 		"no-unused-vars": [
 			"error",
-			{"ignoreRestSiblings": true}
+			{"args": "none", "ignoreRestSiblings": true}
 		],
 
 		"no-use-before-define": ["error"],
@@ -118,7 +121,7 @@
 		// NOTE: This one is important to get right.
 		"curly": [
 			"error",
-			"multi-line",
+			"multi",
 			"consistent"
 		],
 
@@ -147,6 +150,7 @@
 		"func-style": ["error"],
 
 		// NOTE: Gets & Sets paired together?
+		// TODO: Test this one out.
 		"grouped-accessor-pairs": [
 			"error",
 			"getBeforeSet"
@@ -217,7 +221,12 @@
 		"no-bitwise": ["error"],
 		"no-caller": ["error"],
 		"no-case-declarations": ["error"],
-		"no-confusing-arrow": ["error"],
+
+		// NOTE: This marks parenthesis as "less confusing".
+		"no-confusing-arrow": [
+			"error",
+			{"allowParens": true}
+		],
 
 		// NOTE: Keep some console methods, but log is evil!
 		"no-console": [
@@ -291,11 +300,8 @@
 		"no-octal": ["error"],
 		"no-octal-escape": ["error"],
 
-		// NOTE: Strictly disallow parameters to be reassigned.
-		"no-param-reassign": [
-			"error",
-			{"props": true}
-		],
+		// NOTE: Turns out this can help keep naming cleaner.
+		"no-param-reassign": ["off"],
 
 		"no-plusplus": ["error"],
 		"no-proto": ["error"],
@@ -316,7 +322,12 @@
 
 		"no-script-url": ["error"],
 		"no-sequences": ["error"],
-		"no-shadow": ["error"],
+
+		// NOTE:
+		// Turns out shadowing can help with readability.
+		// With this, we'd use longer, more arbitrary names.
+		"no-shadow": ["off"],
+
 		"no-shadow-restricted-names": ["error"],
 
 		// NOTE: Ternaries are nice.
@@ -434,13 +445,13 @@
 		// NOTE: Always use spacing between ( ), [ ], and { }.
 		"array-bracket-spacing": [
 			"error",
-			"always"
+			"never"
 		],
 
-		// NOTE: Seperate elements if there are any newlines.
+		// NOTE: Keep newlines consistent on a per-array basis.
 		"array-element-newline": [
 			"error",
-			{"multiline": true}
+			"consistent"
 		],
 
 		"arrow-parens": ["error"],
@@ -465,7 +476,7 @@
 		// NOTE: Always use spacing between ( ), [ ], and { }.
 		"computed-property-spacing": [
 			"error",
-			"always"
+			"never"
 		],
 
 		// NOTE: Start newlines with operators where applicable.
@@ -522,10 +533,12 @@
 
 		"lines-between-class-members": ["error"],
 
-		// NOTE: Intentionally aggressive.
+		// NOTE:
+		// The max is 90, but its also recommended to keep
+		// 	line-length below 60 if its feasible to do so.
 		"max-len": [
 			"error",
-			{"code": 60, "tabWidth": 2}
+			{"code": 90, "tabWidth": 2}
 		],
 
 		"max-statements-per-line": ["error"],
@@ -538,7 +551,12 @@
 
 		"new-parens": ["error"],
 		"newline-per-chained-call": ["error"],
-		"no-extra-parens": ["error"],
+
+		// NOTE:
+		// Unfortunately, this doesn't provide the config I'd like.
+		// It affects implicit returns in arrow functions.
+		"no-extra-parens": ["off"],
+
 		"no-mixed-spaces-and-tabs": ["error"],
 		"no-multi-spaces": ["error"],
 
@@ -548,14 +566,19 @@
 			{ "max": 2, "maxBOF": 0, "maxEOF": 0 }
 		],
 
-		// NOTE: LOL
-		"no-tabs": ["off"],
+		// NOTE:
+		// Shouldn't mix tabs with inner-code.
+		// Just use the character exclusively as indentation.
+		"no-tabs": [
+			"error",
+			{"allowIndentationTabs": true}
+		],
 
 		"no-trailing-spaces": ["error"],
 		"no-whitespace-before-property": ["error"],
 		"nonblock-statement-body-position": ["error"],
 
-		// NOTE: Seperate curlies if there are any newlines.
+		// NOTE: Keep newlines consistent on a per-object basis.
 		"object-curly-newline": [
 			"error",
 			{"multiline": true}
@@ -564,11 +587,14 @@
 		// NOTE: Always use spacing between ( ), [ ], and { }.
 		"object-curly-spacing": [
 			"error",
-			"always"
+			"never"
 		],
 
-		// NOTE: We have other rules that cover for this.
-		"object-property-newline": ["off"],
+		// NOTE: Keep multiline properties on own lines.
+		"object-property-newline": [
+			"error",
+			{"allowAllPropertiesOnSameLine": true}
+		],
 
 		// NOTE: Start lines with operators where applicable.
 		"operator-linebreak": [
@@ -582,8 +608,21 @@
 			"never"
 		],
 
-		// NOTE: Not worth configuring
-		"padding-line-between-statements": ["off"],
+		// NOTE:
+		// Always a space before the first export.
+		"padding-line-between-statements": [
+			"error",
+			{
+				"prev": "*",
+				"next": "export",
+				"blankLine": "always"
+			},
+			{
+				"prev": "export",
+				"next": "export",
+				"blankLine": "any"
+			}
+		],
 
 		// NOTE: Single Quotes FTW
 		"quotes": [
@@ -608,7 +647,8 @@
 		// NOTE: Always use spacing between ( ), [ ], and { }.
 		"space-in-parens": [
 			"error",
-			"always"
+			"never",
+			{ "exceptions": ["empty"] }
 		],
 
 		"space-infix-ops": ["error"],
@@ -618,7 +658,7 @@
 		// NOTE: Always use spacing between ( ), [ ], and { }.
 		"template-curly-spacing": [
 			"error",
-			"always"
+			"never"
 		],
 
 		// NOTE: Tags are like "gql`Query {...`", no spaces.
