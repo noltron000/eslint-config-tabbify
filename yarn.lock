@@ -9,5 +9,6 @@ __metadata:
   resolution: "eslint-config-tabbify@workspace:."
   peerDependencies:
     eslint: ">=8"
+    eslint-plugin-import: ">=2"
   languageName: unknown
   linkType: soft
