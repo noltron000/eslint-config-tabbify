@@ -43,7 +43,12 @@
 		"no-dupe-else-if": ["error"],
 		"no-dupe-keys": ["error"],
 		"no-duplicate-case": ["error"],
-		"no-duplicate-imports": ["error"],
+
+		// NOTE:
+		// Disabled for the eslint-import-plugin rule.
+		// See also, "import/no-duplicates".
+		// "no-duplicate-imports": ["error"],
+
 		"no-empty-character-class": ["error"],
 		"no-empty-pattern": ["error"],
 		"no-ex-assign": ["error"],
@@ -467,7 +472,11 @@
 		"require-await": ["error"],
 		"require-unicode-regexp": ["error"],
 		"require-yield": ["error"],
-		"sort-imports": ["error"],
+
+		// NOTE:
+		// We use the plugin for this rule.
+		// See also, "import/order".
+		// "sort-imports": ["error"],
 
 		// NOTE:
 		// Its better if related values stay together.
@@ -775,53 +784,120 @@
 
 		/* STATIC ANALYSIS */
 		"import/default": ["error"],
-		"import/named": ["off"],
-		"import/namespace": ["off"],
-		"import/no-absolute-path": ["off"],
-		"import/no-cycle": ["off"],
-		"import/no-dynamic-require": ["off"],
+		"import/named": ["error"],
+		"import/namespace": ["error"],
+		"import/no-absolute-path": ["error"],
+		"import/no-cycle": ["error"],
+		"import/no-dynamic-require": ["error"],
+
+		// QUESTION:
+		// Are there some internal modules that are off-limits?
+		// Maybe you are refactoring, or have distribution dirs?
+		// This rule can forbid certain internal import paths.
 		"import/no-internal-modules": ["off"],
+
+		// NOTE:
+		// Usually it is better to prefer relative packages.
 		"import/no-relative-packages": ["off"],
+
+		// QUESTION:
+		// Do you have a massive, confusing graph-like codebase?
+		// If you want to simplify it, consider using this rule.
 		"import/no-relative-parent-imports": ["off"],
+
+		// QUESTION:
+		// Do you have some incompatible code in your codebase?
+		// If you do, maybe it would be worth configuring this?
 		"import/no-restricted-paths": ["off"],
-		"import/no-self-import": ["off"],
-		"import/no-unresolved": ["off"],
-		"import/no-useless-path-segments": ["off"],
-		"import/no-webpack-loader-syntax": ["off"],
+
+		"import/no-self-import": ["error"],
+		"import/no-unresolved": ["error"],
+		"import/no-useless-path-segments": ["error"],
+		"import/no-webpack-loader-syntax": ["error"],
 
 		/* HELPFUL WARNINGS */
-		"import/export": ["off"],
-		"import/no-deprecated": ["off"],
-		"import/no-extraneous-dependencies": ["off"],
-		"import/no-mutable-exports": ["off"],
-		"import/no-named-as-default-member": ["off"],
-		"import/no-named-as-default": ["off"],
-		"import/no-unused-modules": ["off"],
+		"import/export": ["error"],
+		"import/no-deprecated": ["error"],
+		"import/no-extraneous-dependencies": ["error"],
+		"import/no-mutable-exports": ["error"],
+		"import/no-named-as-default-member": ["error"],
+		"import/no-named-as-default": ["error"],
+		"import/no-unused-modules": ["error"],
 
 		/* MODULE SYSTEMS */
-		"import/no-amd": ["off"],
-		"import/no-commonjs": ["off"],
-		"import/no-import-module-exports": ["off"],
+		"import/no-amd": ["error"],
+		"import/no-commonjs": ["error"],
+		"import/no-import-module-exports": ["error"],
+
+		// QUESTION:
+		// Are you coding for a web project?
+		// If so, you will want to enable this.
 		"import/no-nodejs-modules": ["off"],
-		"import/unambiguous": ["off"],
+
+		"import/unambiguous": ["error"],
 
 		/* STYLE GUIDE */
-		"import/dynamic-import-chunkname": ["off"],
-		"import/exports-last": ["off"],
-		"import/extensions": ["off"],
-		"import/first": ["off"],
-		"import/group-exports": ["off"],
-		"import/imports-first": ["off"],
+		"import/dynamic-import-chunkname": ["error"],
+		"import/exports-last": ["error"],
+
+		// NOTE:
+		// Always provide an extension, except for packages.
+		// WARN:
+		// Right now, due to how TS works with ESM,
+		// 	any ".ts" files import with the ".js" extension.
+		// That reports an error so we need to ignore ts files.
+		"import/extensions": [
+			"error",
+			"ignorePackages",
+			{"ts": "ignore"}
+		],
+
+		"import/first": ["error"],
+		"import/group-exports": ["error"],
+
+		// NOTE:
+		// Don't limit the number of dependencies.
 		"import/max-dependencies": ["off"],
-		"import/newline-after-import": ["off"],
-		"import/no-anonymous-default-export": ["off"],
+
+		// WARN:
+		// This reports double-newlines after imports.
+		// Our rule for exporst ignores double-newlines.
+		"import/newline-after-import": ["error"],
+
+		"import/no-anonymous-default-export": ["error"],
+
+		// NOTE:
+		// Default & Named exports are both fine.
 		"import/no-default-export": ["off"],
-		"import/no-duplicates": ["off"],
-		"import/no-named-default": ["off"],
+
+		// NOTE:
+		// Have to disable base ESLint rule here.
+		"no-duplicate-imports": ["off"],
+		"import/no-duplicates": ["error"],
+
+		"import/no-named-default": ["error"],
+
+		// NOTE:
+		// Default & Named exports are both fine.
 		"import/no-named-export": ["off"],
-		"import/no-namespace": ["off"],
-		"import/no-unassigned-import": ["off"],
-		"import/order": ["off"],
+
+		"import/no-namespace": ["error"],
+		"import/no-unassigned-import": ["error"],
+
+		// NOTE:
+		// Now this is what we came for!
+		// Have to disable base ESLint rule here.
+		"sort-imports": ["off"],
+		"import/order": [
+			"error",
+			{
+				"alphabetize": {"order": "asc"},
+				"warnOnUnassignedImports": true
+			}
+		],
+
+		// NOTE:
+		// Default & Named exports are both fine.
 		"import/prefer-default-export": ["off"]
 	}
 }
