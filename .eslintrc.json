@@ -1,7 +1,8 @@
 {
 	"rules": {
 		/* FIXES FOR POSSIBLE PROBLEMS */
-		// NOTE: This rule can report false-positives.
+		// NOTE:
+		// This rule can report false-positives.
 		"array-callback-return": ["off"],
 
 		"constructor-super": ["error"],
@@ -9,7 +10,8 @@
 		"getter-return": ["error"],
 		"no-async-promise-executor": ["error"],
 
-		// NOTE: Sometimes its useful to have "await" in a loop.
+		// NOTE:
+		// Sometimes its useful to have "await" in a loop.
 		"no-await-in-loop": ["warn"],
 
 		"no-class-assign": ["error"],
@@ -18,13 +20,15 @@
 		"no-const-assign": ["error"],
 		"no-constant-binary-expression": ["error"],
 
-		// NOTE: It can be useful to use "while (true)" loops.
+		// NOTE:
+		// It can be useful to use "while (true)" loops.
 		"no-constant-condition": [
 		"error",
 			{"checkLoops": false}
 		],
 
-		// NOTE: Returning in a constructor can be intentional.
+		// NOTE:
+		// Returning in a constructor can be intentional.
 		"no-constructor-return": ["warn"],
 
 		"no-control-regex": ["error"],
@@ -42,7 +46,8 @@
 		"no-func-assign": ["error"],
 		"no-import-assign": ["error"],
 
-		// NOTE: Clean out certain hoisted patterns.
+		// NOTE:
+		// Cleans out certain hoisted patterns.
 		"no-inner-declarations": [
 			"error",
 			"both"
@@ -63,7 +68,8 @@
 		"no-template-curly-in-string": ["error"],
 		"no-this-before-super": ["error"],
 
-		// NOTE: Prevent using global vars without tagging them.
+		// NOTE:
+		// Prevent using global vars without tagging them.
 		"no-undef": [
 			"error",
 			{"typeof": true}
@@ -75,13 +81,15 @@
 		"no-unreachable-loop": ["error"],
 		"no-unsafe-finally": ["error"],
 
-		// NOTE: Check for unclear negation with relational operators.
+		// NOTE:
+		// Check for unclear negation with relational operators.
 		"no-unsafe-negation": [
 			"error",
 			{"enforceForOrderingRelations": true}
 		],
 
-		// NOTE: Disallow some ambiguous math resulting in "NaN".
+		// NOTE:
+		// Disallow some ambiguous math resulting in "NaN".
 		"no-unsafe-optional-chaining": [
 			"error",
 			{"disallowArithmeticOperators": true}
@@ -110,7 +118,8 @@
 		"block-scoped-var": ["error"],
 		"camelcase": ["error"],
 
-		// NOTE: This one was excessively annoying!
+		// NOTE:
+		// This one was excessively annoying!
 		"capitalized-comments": ["off"],
 
 		"class-methods-use-this": ["error"],
@@ -118,21 +127,24 @@
 		"consistent-return": ["error"],
 		"consistent-this": ["error"],
 
-		// NOTE: This one is important to get right.
+		// NOTE:
+		// Consistently newline expressions etc.
 		"curly": [
 			"error",
 			"multi",
 			"consistent"
 		],
 
-		// NOTE: Don't mess with default cases.
+		// NOTE:
+		// Don't mess with defaults in switch cases.
 		"default-case": ["off"],
 		"default-case-last": ["off"],
 
 		"default-param-last": ["error"],
 		"dot-notation": ["error"],
 
-		// NOTE: Use triple equals except when comparing null loosely.
+		// NOTE:
+		// Use triple equals except when comparing null loosely.
 		"eqeqeq": [
 			"error",
 			"always",
@@ -141,7 +153,8 @@
 
 		"func-name-matching": ["error"],
 
-		// NOTE: should use "const x = function(){...}"
+		// NOTE:
+		// Use "const x = function(){...}"
 		"func-names": [
 			"error",
 			"never"
@@ -149,8 +162,10 @@
 
 		"func-style": ["error"],
 
-		// NOTE: Gets & Sets paired together?
-		// TODO: Test this one out.
+		// NOTE:
+		// Gets & Sets paired together?
+		// TODO:
+		// Test this one out.
 		"grouped-accessor-pairs": [
 			"error",
 			"getBeforeSet"
@@ -158,18 +173,22 @@
 
 		"guard-for-in": ["error"],
 
-		// NOTE: No need to restrict variable names.
+		// NOTE:
+		// No need to restrict variable names.
 		"id-denylist": ["off"],
 
 		"id-length": ["error"],
 
-		// NOTE: Already using camelCase.
+		// NOTE:
+		// Already using camelCase. No need to configure here.
 		"id-match": ["off"],
 
-		// NOTE: Allows gated declarations "let x; if (y) x=4".
+		// NOTE:
+		// Allow for gated declarations "let x; if (y) x=4".
 		"init-declarations": ["off"],
 
-		// NOTE: Enforces arbitrary maxes of certain patterns.
+		// NOTE:
+		// Enforce arbitrarily-set maxes of certain patterns.
 		"max-classes-per-file": [
 			"error",
 			// Default 1
@@ -212,7 +231,8 @@
 			{"max": 30}
 		],
 
-		// NOTE: None of the settings are really attractive.
+		// NOTE:
+		// These options for comments really aren't attractive.
 		"multiline-comment-style": ["off"],
 
 		"new-cap": ["error"],
@@ -222,13 +242,15 @@
 		"no-caller": ["error"],
 		"no-case-declarations": ["error"],
 
-		// NOTE: This marks parenthesis as "less confusing".
+		// NOTE:
+		// This marks parenthesis as "less confusing".
 		"no-confusing-arrow": [
 			"error",
 			{"allowParens": true}
 		],
 
-		// NOTE: Keep some console methods, but log is evil!
+		// NOTE:
+		// Keep some console methods, but log is evil!
 		"no-console": [
 			"error",
 			{"allow": ["clear", "info", "warn", "error", "table"]}
@@ -237,14 +259,16 @@
 		"no-continue": ["error"],
 		"no-delete-var": ["error"],
 
-		// NOTE: Doesn't seem helpful.
+		// NOTE:
+		// This doesn't seem helpful.
 		"no-div-regex": ["off"],
 		"no-else-return": ["off"],
 
 		"no-empty": ["error"],
 		"no-empty-function": ["error"],
 
-		// NOTE: Use "eqeqeq" instead.
+		// NOTE:
+		// Use the "eqeqeq" rule instead.
 		"no-eq-null": ["off"],
 
 		"no-eval": ["error"],
@@ -256,7 +280,9 @@
 		"no-floating-decimal": ["error"],
 		"no-global-assign": ["error"],
 
-		// NOTE: Boolean coercion is fine.
+		// NOTE:
+		// Shorthand boolean coercion is fine.
+		// Ex: "if (!!someString) {...}"
 		"no-implicit-coercion": [
 			"error",
 			{"boolean": false}
@@ -265,21 +291,24 @@
 		"no-implicit-globals": ["error"],
 		"no-implied-eval": ["error"],
 
-		// NOTE: Wow dumb
+		// NOTE:
+		// This isn't a rule we support.
 		"no-inline-comments": ["off"],
 
 		"no-invalid-this": ["error"],
 		"no-iterator": ["error"],
 		"no-label-var": ["error"],
 
-		// NOTE: Labels can be used to break parent statements.
+		// NOTE:
+		// Labels can be used to break parent statements.
 		"no-labels": ["off"],
 
 		"no-lone-blocks": ["error"],
 		"no-lonely-if": ["error"],
 		"no-loop-func": ["error"],
 
-		// NOTE: This turned out to be supremely annoying.
+		// NOTE:
+		// This turned out to be supremely annoying.
 		"no-magic-numbers": ["off"],
 
 		"no-mixed-operators": ["error"],
@@ -287,10 +316,14 @@
 		"no-multi-str": ["error"],
 		"no-negated-condition": ["error"],
 
-		// NOTE: I like nested ternaries.
+		// NOTE:
+		// I like nested ternaries...
+		// TODO:
+		// Do I like them enough, though?
 		"no-nested-ternary": ["off"],
 
-		// NOTE: We use new.
+		// NOTE:
+		// We use new.
 		"no-new": ["off"],
 
 		"no-new-func": ["error"],
@@ -300,7 +333,8 @@
 		"no-octal": ["error"],
 		"no-octal-escape": ["error"],
 
-		// NOTE: Turns out this can help keep naming cleaner.
+		// NOTE:
+		// Turns out this can help keep naming cleaner.
 		"no-param-reassign": ["off"],
 
 		"no-plusplus": ["error"],
@@ -308,7 +342,8 @@
 		"no-redeclare": ["error"],
 		"no-regex-spaces": ["error"],
 
-		// NOTE: Nothing to restrict here.
+		// NOTE:
+		// There's nothing to restrict here.
 		"no-restricted-exports": ["off"],
 		"no-restricted-globals": ["off"],
 		"no-restricted-imports": ["off"],
@@ -317,7 +352,8 @@
 
 		"no-return-assign": ["error"],
 
-		// NOTE: We expect to await items in async.
+		// NOTE:
+		// We expect to await items in async.
 		"no-return-await": ["off"],
 
 		"no-script-url": ["error"],
@@ -330,19 +366,22 @@
 
 		"no-shadow-restricted-names": ["error"],
 
-		// NOTE: Ternaries are nice.
+		// NOTE:
+		// Ternaries are nice.
 		"no-ternary": ["off"],
 
 		"no-throw-literal": ["error"],
 
-		// NOTE: MEH.
+		// NOTE:
+		// These rules are either uneccessary, or redundant.
 		"no-undef-init": ["off"],
 		"no-undefined": ["off"],
 		"no-underscore-dangle": ["off"],
 
 		"no-unneeded-ternary": ["error"],
 
-		// NOTE: Allow expressions which cause side-effects.
+		// NOTE:
+		// Allow these expressions which cause side-effects.
 		"no-unused-expressions": [
 			"error",
 			{"allowShortCircuit": true, "allowTernary": true}
@@ -359,27 +398,32 @@
 		"no-useless-return": ["error"],
 		"no-var": ["error"],
 
-		// NOTE: We use void to show purposefully unawaited async calls.
+		// NOTE:
+		// We use void to show purposefully unawaited async calls.
 		"no-void": ["off"],
 
-		// NOTE: Useless
+		// NOTE:
+		// Useless.
 		"no-warning-comments": ["off"],
 
 		"no-with": ["error"],
 
-		// NOTE: the record object should be consistent!
+		// NOTE:
+		// The record object should be consistent!
 		"object-shorthand": [
 			"error",
 			"consistent-as-needed"
 		],
 
-		// NOTE: Simpler to read
+		// NOTE:
+		// Simpler to read.
 		"one-var": [
 			"error",
 			"never"
 		],
 
-		// NOTE: Also simpler here
+		// NOTE:
+		// Also simpler here.
 		"one-var-declaration-per-line": [
 			"error",
 			"always"
@@ -408,7 +452,8 @@
 			"consistent-as-needed"
 		],
 
-		// NOTE: Don't complicate parseInt unless its needed.
+		// NOTE:
+		// Don't complicate parseInt unless its needed.
 		"radix": [
 			"error",
 			"as-needed"
@@ -419,11 +464,13 @@
 		"require-yield": ["error"],
 		"sort-imports": ["error"],
 
-		// NOTE: Its better if related values stay together.
+		// NOTE:
+		// Its better if related values stay together.
 		"sort-keys": ["off"],
 		"sort-vars": ["off"],
 
-		// NOTE: Should have spaced block comments as well.
+		// NOTE:
+		// Should have spaced block comments as well.
 		"spaced-comment": [
 			"error",
 			"always",
@@ -436,19 +483,23 @@
 		"yoda": ["error"],
 
 		/* STYLISTIC FIXES FOR LAYOUT & FORMATTING */
-		// NOTE: Seperate brackets if there are any newlines.
+		// NOTE:
+		// Seperate brackets if there are any newlines.
 		"array-bracket-newline": [
 			"error",
 			{"multiline": true}
 		],
 
-		// NOTE: Always use spacing between ( ), [ ], and { }.
+		// NOTE:
+		// Always use spacing between ( ), [ ], and { }.
+		// Otherwise there shouldn't be any space-padding.
 		"array-bracket-spacing": [
 			"error",
 			"never"
 		],
 
-		// NOTE: Keep newlines consistent on a per-array basis.
+		// NOTE:
+		// Keep newlines consistent on a per-array basis.
 		"array-element-newline": [
 			"error",
 			"consistent"
@@ -458,13 +509,15 @@
 		"arrow-spacing": ["error"],
 		"block-spacing": ["error"],
 
-		// NOTE: OPINION: Stroustrup is the best brace style.
+		// NOTE:
+		// Stroustrup is the best brace style!!!
 		"brace-style": [
 			"error",
 			"stroustrup"
 		],
 
-		// NOTE: This is best for diff churn.
+		// NOTE:
+		// This is best for diff churn.
 		"comma-dangle": [
 			"error",
 			"always-multiline"
@@ -473,13 +526,16 @@
 		"comma-spacing": ["error"],
 		"comma-style": ["error"],
 
-		// NOTE: Always use spacing between ( ), [ ], and { }.
+		// NOTE:
+		// Always use spacing between ( ), [ ], and { }.
+		// Otherwise there shouldn't be any space-padding.
 		"computed-property-spacing": [
 			"error",
 			"never"
 		],
 
-		// NOTE: Start newlines with operators where applicable.
+		// NOTE:
+		// Start newlines with operators where applicable.
 		"dot-location": [
 			"error",
 			"property"
@@ -493,13 +549,15 @@
 			"consistent"
 		],
 
-		// NOTE: Seperate parens if there are any newlines.
+		// NOTE:
+		// Seperate parens if there are any newlines.
 		"function-paren-newline": [
 			"error",
 			"multiline"
 		],
 
-		// NOTE: Space it like you would "async"
+		// NOTE:
+		// Space it like you would "async"
 		"generator-star-spacing": [
 			"error",
 			"both"
@@ -507,14 +565,16 @@
 
 		"implicit-arrow-linebreak": ["error"],
 
-		// NOTE: We use tabs! Don't indent member expressions!
+		// NOTE:
+		// We use tabs! And, don't indent member expressions!
 		"indent": [
 			"error",
 			"tab",
 			{"SwitchCase": 1, "MemberExpression": 0}
 		],
 
-		// NOTE: Prefer single-quotes wherever possible!
+		// NOTE:
+		// Prefer single-quotes wherever possible!
 		"jsx-quotes": [
 			"error",
 			"prefer-single"
@@ -523,12 +583,14 @@
 		"key-spacing": ["error"],
 		"keyword-spacing": ["error"],
 
-		// NOTE: Nope.
+		// NOTE:
+		// Nope. We don't dictate how comments should work.
 		"line-comment-position": ["off"],
 
 		"linebreak-style": ["error"],
 
-		// NOTE: Nope again.
+		// NOTE:
+		// Nope again.
 		"lines-around-comment": ["off"],
 
 		"lines-between-class-members": ["error"],
@@ -543,7 +605,8 @@
 
 		"max-statements-per-line": ["error"],
 
-		// NOTE: Use multiline ternaries if there's newlines.
+		// NOTE:
+		// Allow multiline ternaries if there's newlines.
 		"multiline-ternary": [
 			"error",
 			"always-multiline"
@@ -555,12 +618,15 @@
 		// NOTE:
 		// Unfortunately, this doesn't provide the config I'd like.
 		// It affects implicit returns in arrow functions.
+		// TODO:
+		// Find an alternative config option that suites this need.
 		"no-extra-parens": ["off"],
 
 		"no-mixed-spaces-and-tabs": ["error"],
 		"no-multi-spaces": ["error"],
 
-		// NOTE: Double-newlines are good for seperating stuff.
+		// NOTE:
+		// Double-newlines are good for seperating stuff.
 		"no-multiple-empty-lines": [
 			"error",
 			{ "max": 2, "maxBOF": 0, "maxEOF": 0 }
@@ -578,31 +644,37 @@
 		"no-whitespace-before-property": ["error"],
 		"nonblock-statement-body-position": ["error"],
 
-		// NOTE: Keep newlines consistent on a per-object basis.
+		// NOTE:
+		// Keep newlines consistent on a per-object basis.
 		"object-curly-newline": [
 			"error",
 			{"multiline": true}
 		],
 
-		// NOTE: Always use spacing between ( ), [ ], and { }.
+		// NOTE:
+		// Always use spacing between ( ), [ ], and { }.
+		// Otherwise there shouldn't be any space-padding.
 		"object-curly-spacing": [
 			"error",
 			"never"
 		],
 
-		// NOTE: Keep multiline properties on own lines.
+		// NOTE:
+		// Keep multiline properties on own lines.
 		"object-property-newline": [
 			"error",
 			{"allowAllPropertiesOnSameLine": true}
 		],
 
-		// NOTE: Start lines with operators where applicable.
+		// NOTE:
+		// Start lines with operators where applicable.
 		"operator-linebreak": [
 			"error",
 			"before"
 		],
 
-		// NOTE: gross.
+		// NOTE:
+		// Gross...
 		"padded-blocks": [
 			"error",
 			"never"
@@ -624,7 +696,8 @@
 			}
 		],
 
-		// NOTE: Single Quotes FTW
+		// NOTE:
+		// Single Quotes FTW!
 		"quotes": [
 			"error",
 			"single"
@@ -632,7 +705,8 @@
 
 		"rest-spread-spacing": ["error"],
 
-		// NOTE: Ew.
+		// NOTE:
+		// Ew... No semis!
 		"semi": [
 			"error",
 			"never",
@@ -644,7 +718,9 @@
 		"space-before-blocks": ["error"],
 		"space-before-function-paren": ["error"],
 
-		// NOTE: Always use spacing between ( ), [ ], and { }.
+		// NOTE:
+		// Always use spacing between ( ), [ ], and { }.
+		// Otherwise there shouldn't be any space-padding.
 		"space-in-parens": [
 			"error",
 			"never",
@@ -655,13 +731,16 @@
 		"space-unary-ops": ["error"],
 		"switch-colon-spacing": ["error"],
 
-		// NOTE: Always use spacing between ( ), [ ], and { }.
+		// NOTE:
+		// Always use spacing between ( ), [ ], and { }.
+		// Otherwise there shouldn't be any space-padding.
 		"template-curly-spacing": [
 			"error",
 			"never"
 		],
 
-		// NOTE: Tags are like "gql`Query {...`", no spaces.
+		// NOTE:
+		// Tags are like "gql`Query {...`", with no spaces.
 		"template-tag-spacing": [
 			"error",
 			"never"
@@ -669,7 +748,8 @@
 
 		"unicode-bom": ["error"],
 
-		// NOTE: Inside option causes better readability.
+		// NOTE:
+		// Inside option gives better readability.
 		"wrap-iife": [
 			"error",
 			"inside"
@@ -677,7 +757,8 @@
 
 		"wrap-regex": ["error"],
 
-		// NOTE: Consistent with "generator-star-spacing"
+		// NOTE:
+		// Consistent with "generator-star-spacing"
 		"yield-star-spacing": [
 			"error",
 			"both"

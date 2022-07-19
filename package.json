@@ -6,6 +6,7 @@
 	"description": "Base linter configs for the opinionated JavaScript style guide, Tabbify.",
 	"keywords": [
 		"ESLint",
+		"ESLintConfig",
 		"config",
 		"tabbify",
 		"tabs",
@@ -26,12 +27,12 @@
 		"email": "noltron000@gmail.com",
 		"url": "https://noltron000.com/"
 	},
-	"contributors": [],
+	"contributors": [ ],
 	"packageManager": "yarn@3.2.1",
 	"main": ".eslintrc.json",
 	"type": "commonjs",
-	"dependencies": {},
-	"devDependencies": {},
+	"dependencies": { },
+	"devDependencies": { },
 	"peerDependencies": {
 		"eslint": ">=8"
 	}
