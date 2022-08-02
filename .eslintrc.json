@@ -141,7 +141,7 @@
 		// Consistently newline expressions etc.
 		"curly": [
 			"error",
-			"multi",
+			"multi-or-nest",
 			"consistent"
 		],
 
