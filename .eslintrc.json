@@ -232,7 +232,7 @@
 		"max-params": [
 			"error",
 			// Default 3
-			{"max": 3}
+			{"max": 6}
 		],
 
 		"max-statements": [
@@ -324,7 +324,12 @@
 		"no-mixed-operators": ["error"],
 		"no-multi-assign": ["error"],
 		"no-multi-str": ["error"],
-		"no-negated-condition": ["error"],
+
+		// NOTE:
+		// Disable for things like "if (variable != null) {...}"
+		// TODO:
+		// Is this worth a warning?
+		"no-negated-condition": ["off"],
 
 		// NOTE:
 		// I like nested ternaries...
@@ -442,7 +447,14 @@
 		"operator-assignment": ["error"],
 		"prefer-arrow-callback": ["error"],
 		"prefer-const": ["error"],
-		"prefer-destructuring": ["error"],
+
+		// NOTE:
+		// If we want to explicitly typify a var (as in TypeScript),
+		// 	we'd have to ignore this rule first.
+		// TODO:
+		// Could be worth warning.
+		"prefer-destructuring": ["off"],
+
 		"prefer-exponentiation-operator": ["error"],
 		"prefer-named-capture-group": ["error"],
 		"prefer-numeric-literals": ["error"],
@@ -820,7 +832,12 @@
 		"import/no-deprecated": ["error"],
 		"import/no-extraneous-dependencies": ["error"],
 		"import/no-mutable-exports": ["error"],
-		"import/no-named-as-default-member": ["error"],
+
+		// QUESTION:
+		// Are you upgrading from a Babel version prior to 6?
+		// The docs say this rule could be useful then.
+		"import/no-named-as-default-member": ["off"],
+
 		"import/no-named-as-default": ["error"],
 		"import/no-unused-modules": ["error"],
 
