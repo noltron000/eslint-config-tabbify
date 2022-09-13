@@ -503,10 +503,19 @@
 
 		// NOTE:
 		// Should have spaced block comments as well.
+		// There are some exceptions for js-doc and ts-directives.
 		"spaced-comment": [
 			"error",
 			"always",
-			{"block": {"balanced": true}}
+			{
+				"line": {
+					"markers": ["/"]
+				},
+				"block": {
+					"balanced": true,
+					"markers": ["*"]
+				}
+			}
 		],
 
 		"strict": ["error"],
@@ -585,7 +594,7 @@
 		// Seperate parens if there are any newlines.
 		"function-paren-newline": [
 			"error",
-			"multiline"
+			"multiline-arguments"
 		],
 
 		// NOTE:
@@ -860,7 +869,14 @@
 		"import/unambiguous": ["error"],
 
 		/* STYLE GUIDE */
-		"import/dynamic-import-chunkname": ["error"],
+
+		// NOTE:
+		// Added a custom chunkname format to explicitly allow for dynamic chunknames.
+		"import/dynamic-import-chunkname": [
+			"error",
+			{"webpackChunknameFormat": "\\[?[a-zA-Z0-57-9-/_]+\\]?"}
+		],
+
 		"import/exports-last": ["error"],
 
 		// NOTE:
@@ -872,7 +888,7 @@
 		"import/extensions": [
 			"error",
 			"ignorePackages",
-			{"ts": "ignore"}
+			{"ts": "ignore", "tsx": "ignore"}
 		],
 
 		"import/first": ["error"],
@@ -905,7 +921,13 @@
 		"import/no-named-export": ["off"],
 
 		"import/no-namespace": ["error"],
-		"import/no-unassigned-import": ["error"],
+
+		// NOTE:
+		// In JSX, we can import css for styling without assigning anything.
+		"import/no-unassigned-import": [
+			"error",
+			{"allow": ["**/*.css"]}
+		],
 
 		// NOTE:
 		// Now this is what we came for!
