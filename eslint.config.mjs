@@ -1,8 +1,17 @@
 import _import from "eslint-plugin-import";
+import eslintPlugin from 'eslint-plugin-eslint-plugin';
+import nodePlugin from "eslint-plugin-n"
 import {fixupPluginRules} from "@eslint/compat";
 
 const config = [
+	eslintPlugin.configs['flat/recommended'],
+	nodePlugin.configs["flat/recommended-script"],
+
 	{
+		languageOptions: {
+				sourceType: 'module'
+		},
+
 		plugins: {
 			import: fixupPluginRules(_import),
 		},
