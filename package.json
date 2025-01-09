@@ -2,7 +2,7 @@
 	"name": "eslint-config-tabbify",
 	"private": false,
 	"license": "MIT",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Base linter configs for the opinionated JavaScript style guide, Tabbify.",
 	"keywords": [
 		"ESLint",
@@ -29,7 +29,7 @@
 	},
 	"contributors": [ ],
 	"packageManager": "yarn@4.6.0",
-	"main": ".eslint.config.mjs",
+	"main": "eslint.config.mjs",
 	"type": "module",
 	"dependencies": {
 		"@eslint/compat": "^1.2.4",
