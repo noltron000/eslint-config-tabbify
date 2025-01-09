@@ -1,3 +1,5 @@
+/* eslint max-lines: 0 */
+
 import {fixupPluginRules} from '@eslint/compat'
 import eslintPlugin from 'eslint-plugin-eslint-plugin'
 import _import from 'eslint-plugin-import'
@@ -686,8 +688,9 @@ const config = [
 			// NOTE:
 			// Shouldn't mix tabs with inner-code.
 			// Just use the character exclusively as indentation.
+			// At times, this triggers in comments - which is OK.
 			'no-tabs': [
-				'error',
+				'warn',
 				{allowIndentationTabs: true},
 			],
 
@@ -954,6 +957,9 @@ const config = [
 			// NOTE:
 			// Default & Named exports are both fine.
 			'import/prefer-default-export': ['off'],
+
+			/* OTHER */
+			'n/no-unpublished-import': ['off'],
 		},
 	},
 ]
