@@ -856,7 +856,7 @@ const config = [
 			// Seems like commonjs wasn't permitted without this?
 			// That is an odd default, maybe I need to
 			//   look at this a little bit more?
-			'import/no-unresolved': ['error', {commonjs: true}],
+			'import/no-unresolved': ['error', {commonjs: true, amd: true}],
 
 			'import/no-useless-path-segments': ['error'],
 			'import/no-webpack-loader-syntax': ['error'],
