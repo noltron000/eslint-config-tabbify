@@ -2,7 +2,7 @@
 	"name": "eslint-config-tabbify",
 	"private": false,
 	"license": "MIT",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"description": "Base linter configs for the opinionated JavaScript style guide, Tabbify.",
 	"keywords": [
 		"ESLint",
@@ -33,12 +33,12 @@
 	"type": "module",
 	"dependencies": {
 		"@eslint/compat": "^1.2.4",
-		"eslint-plugin-import": "^2.31.0"
+		"eslint-plugin-eslint-plugin": "^6.4.0",
+		"eslint-plugin-import": "^2.31.0",
+		"eslint-plugin-n": "^17.15.1"
 	},
 	"devDependencies": {
-		"eslint": "^9.17.0",
-		"eslint-plugin-eslint-plugin": "^6.4.0",
-		"eslint-plugin-n": "^17.15.1"
+		"eslint": "^9.17.0"
 	},
 	"peerDependencies": {
 		"@eslint/js": ">=9",
