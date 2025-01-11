@@ -1,8 +1,7 @@
 /* eslint max-lines: 0 */
 
-import {fixupPluginRules} from '@eslint/compat'
 import eslintPlugin from 'eslint-plugin-eslint-plugin'
-import _import from 'eslint-plugin-import'
+import importPlugin from 'eslint-plugin-import'
 import nodePlugin from 'eslint-plugin-n'
 
 const config = [
@@ -12,7 +11,11 @@ const config = [
 	{
 		languageOptions: {sourceType: 'module'},
 
-		plugins: {import: fixupPluginRules(_import)},
+		plugins: {
+			'@import': importPlugin,
+			'@eslint': eslintPlugin,
+			'@node': nodePlugin,
+		},
 
 		rules: {
 			/** **************************************************
@@ -964,7 +967,9 @@ const config = [
 			'import/prefer-default-export': ['off'],
 
 			/* OTHER */
-			'n/no-unpublished-import': ['off'],
+			// These were just giving me a headache! D:
+			'@node/no-unpublished-import': ['off'],
+			'@node/no-missing-import': ['off'],
 		},
 	},
 ]
