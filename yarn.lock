@@ -659,7 +659,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.31.0"
     eslint-plugin-n: "npm:^17.15.1"
   peerDependencies:
-    eslint: ">=9"
+    eslint: ">=9.18"
   languageName: unknown
   linkType: soft
 

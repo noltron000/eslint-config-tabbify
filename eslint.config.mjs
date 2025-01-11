@@ -968,8 +968,8 @@ const config = [
 
 			/* OTHER */
 			// These were just giving me a headache! D:
-			'@node/no-unpublished-import': ['off'],
-			'@node/no-missing-import': ['off'],
+			'n/no-unpublished-import': ['off'],
+			'n/no-missing-import': ['off'],
 		},
 	},
 ]

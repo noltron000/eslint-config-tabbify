@@ -1,8 +1,7 @@
 {
 	"name": "eslint-config-tabbify",
-	"private": false,
 	"license": "MIT",
-	"version": "0.2.9",
+	"version": "0.2.10",
 	"description": "Base linter configs for the opinionated JavaScript style guide, Tabbify.",
 	"keywords": [
 		"ESLint",
@@ -27,7 +26,7 @@
 		"email": "noltron000@gmail.com",
 		"url": "https://noltron000.com/"
 	},
-	"contributors": [ ],
+	"contributors": [],
 	"packageManager": "yarn@4.6.0",
 	"main": "eslint.config.mjs",
 	"type": "module",
