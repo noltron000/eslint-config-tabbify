@@ -826,79 +826,79 @@ const config = [
 			****************************************************** */
 
 			/* STATIC ANALYSIS */
-			'import/default': ['error'],
-			'import/named': ['error'],
-			'import/namespace': ['error'],
-			'import/no-absolute-path': ['error'],
-			'import/no-cycle': ['error'],
-			'import/no-dynamic-require': ['error'],
+			'@import/default': ['error'],
+			'@import/named': ['error'],
+			'@import/namespace': ['error'],
+			'@import/no-absolute-path': ['error'],
+			'@import/no-cycle': ['error'],
+			'@import/no-dynamic-require': ['error'],
 
 			// QUESTION:
 			// Are there some internal modules that are off-limits?
 			// Maybe you are refactoring, or have distribution dirs?
 			// This rule can forbid certain internal import paths.
-			'import/no-internal-modules': ['off'],
+			'@import/no-internal-modules': ['off'],
 
 			// NOTE:
 			// Usually it is better to prefer relative packages.
-			'import/no-relative-packages': ['off'],
+			'@import/no-relative-packages': ['off'],
 
 			// QUESTION:
 			// Do you have a massive, confusing graph-like codebase?
 			// If you want to simplify it, consider using this rule.
-			'import/no-relative-parent-imports': ['off'],
+			'@import/no-relative-parent-imports': ['off'],
 
 			// QUESTION:
 			// Do you have some incompatible code in your codebase?
 			// If you do, maybe it would be worth configuring this?
-			'import/no-restricted-paths': ['off'],
+			'@import/no-restricted-paths': ['off'],
 
-			'import/no-self-import': ['error'],
+			'@import/no-self-import': ['error'],
 
 			// NOTE:
 			// This was just giving me too many headaches.
 			// Not worth my time :)
-			'import/no-unresolved': ['off'],
+			'@import/no-unresolved': ['off'],
 
-			'import/no-useless-path-segments': ['error'],
-			'import/no-webpack-loader-syntax': ['error'],
+			'@import/no-useless-path-segments': ['error'],
+			'@import/no-webpack-loader-syntax': ['error'],
 
 			/* HELPFUL WARNINGS */
-			'import/export': ['error'],
-			'import/no-deprecated': ['error'],
-			'import/no-extraneous-dependencies': ['error'],
-			'import/no-mutable-exports': ['error'],
+			'@import/export': ['error'],
+			'@import/no-deprecated': ['error'],
+			'@import/no-extraneous-dependencies': ['error'],
+			'@import/no-mutable-exports': ['error'],
 
 			// QUESTION:
 			// Are you upgrading from a Babel version prior to 6?
 			// The docs say this rule could be useful then.
-			'import/no-named-as-default-member': ['off'],
+			'@import/no-named-as-default-member': ['off'],
 
-			'import/no-named-as-default': ['error'],
-			'import/no-unused-modules': ['error'],
+			'@import/no-named-as-default': ['error'],
+			'@import/no-unused-modules': ['error'],
 
 			/* MODULE SYSTEMS */
-			'import/no-amd': ['error'],
-			'import/no-commonjs': ['error'],
-			'import/no-import-module-exports': ['error'],
+			'@import/no-amd': ['error'],
+			'@import/no-commonjs': ['error'],
+			'@import/no-import-module-exports': ['error'],
 
 			// QUESTION:
 			// Are you coding for a web project?
 			// If so, you will want to enable this.
-			'import/no-nodejs-modules': ['off'],
+			'@import/no-nodejs-modules': ['off'],
 
-			'import/unambiguous': ['error'],
+			'@import/unambiguous': ['error'],
 
 			/* STYLE GUIDE */
 
 			// NOTE:
 			// Added a custom chunkname format to explicitly allow for dynamic chunknames.
-			'import/dynamic-import-chunkname': [
+			'@import/dynamic-import-chunkname': [
 				'error',
 				{webpackChunknameFormat: '\\[?[a-zA-Z0-57-9-/_]+\\]?'},
 			],
 
-			'import/exports-last': ['error'],
+			'@import/exports-last': ['error'],
 
 			// NOTE:
 			// Always provide an extension, except for packages.
@@ -906,46 +906,46 @@ const config = [
 			// Right now, due to how TS works with ESM,
 			// 	any ".ts" files import with the ".js" extension.
 			// That reports an error so we need to ignore ts files.
-			'import/extensions': [
+			'@import/extensions': [
 				'error',
 				'ignorePackages',
 				{ts: 'ignore', tsx: 'ignore'},
 			],
 
-			'import/first': ['error'],
-			'import/group-exports': ['error'],
+			'@import/first': ['error'],
+			'@import/group-exports': ['error'],
 
 			// NOTE:
 			// Don't limit the number of dependencies.
-			'import/max-dependencies': ['off'],
+			'@import/max-dependencies': ['off'],
 
 			// WARN:
 			// This reports double-newlines after imports.
 			// Our rule for exporst ignores double-newlines.
-			'import/newline-after-import': ['error'],
+			'@import/newline-after-import': ['error'],
 
-			'import/no-anonymous-default-export': ['error'],
+			'@import/no-anonymous-default-export': ['error'],
 
 			// NOTE:
 			// Default & Named exports are both fine.
-			'import/no-default-export': ['off'],
+			'@import/no-default-export': ['off'],
 
 			// NOTE:
 			// Have to disable base ESLint rule here.
 			'no-duplicate-imports': ['off'],
-			'import/no-duplicates': ['error'],
+			'@import/no-duplicates': ['error'],
 
-			'import/no-named-default': ['error'],
+			'@import/no-named-default': ['error'],
 
 			// NOTE:
 			// Default & Named exports are both fine.
-			'import/no-named-export': ['off'],
+			'@import/no-named-export': ['off'],
 
-			'import/no-namespace': ['error'],
+			'@import/no-namespace': ['error'],
 
 			// NOTE:
 			// In JSX, we can import css for styling without assigning anything.
-			'import/no-unassigned-import': [
+			'@import/no-unassigned-import': [
 				'error',
 				{allow: ['**/*.css']},
 			],
@@ -954,7 +954,7 @@ const config = [
 			// Now this is what we came for!
 			// Have to disable base ESLint rule here.
 			'sort-imports': ['off'],
-			'import/order': [
+			'@import/order': [
 				'error',
 				{
 					alphabetize: {order: 'asc'},
@@ -964,7 +964,7 @@ const config = [
 
 			// NOTE:
 			// Default & Named exports are both fine.
-			'import/prefer-default-export': ['off'],
+			'@import/prefer-default-export': ['off'],
 
 			/* OTHER */
 			// These were just giving me a headache! D:
