@@ -508,6 +508,143 @@ const config = [
 			'n/prefer-node-protocol': ['error'],
 
 			/*****************************************************
+				ESLint Import Plugin Rules
+			*****************************************************/
+			/* STATIC ANALYSIS */
+			'import/no-absolute-path': ['error'],
+			'import/no-cycle': ['error'],
+			'import/no-dynamic-require': ['error'],
+
+			// QUESTION:
+			// Have some internal modules that are off-limits?
+			// Maybe you're refactoring or have distribution dirs?
+			// This rule can forbid certain internal import paths.
+			'import/no-internal-modules': ['off'],
+
+			// Usually it is better to *prefer* relative packages.
+			'import/no-relative-packages': ['off'],
+
+			// QUESTION:
+			// Do you have a confusing graph-like codebase?
+			// To refactor/simplify it, consider using this rule.
+			'import/no-relative-parent-imports': ['off'],
+
+			// QUESTION:
+			// Do you have incompatible code in your codebase?
+			// If you do, maybe it would be worth using this?
+			'import/no-restricted-paths': ['off'],
+
+			'import/no-self-import': ['error'],
+			'import/no-useless-path-segments': ['error'],
+			'import/no-webpack-loader-syntax': ['error'],
+
+			/* HELPFUL WARNINGS */
+			'import/no-deprecated': ['error'],
+			'import/no-empty-named-blocks': ['error'],
+			'import/no-extraneous-dependencies': ['error'],
+			'import/no-mutable-exports': ['error'],
+			'import/no-unused-modules': ['error'],
+
+			/* MODULE SYSTEMS */
+			'import/no-amd': ['error'],
+			'import/no-commonjs': ['error'],
+			'import/no-import-module-exports': ['error'],
+
+			// QUESTION:
+			// Are you coding for a web project?
+			// If so, you will want to enable this.
+			'import/no-nodejs-modules': ['off'],
+
+			'import/unambiguous': ['error'],
+
+			/* STYLE GUIDE */
+			'import/consistent-type-specifier-style': ['error'],
+
+			// Added a custom chunkname format to explicitly
+			//  allow for dynamic chunknames.
+			'import/dynamic-import-chunkname': [
+				'error',
+				{
+					webpackChunknameFormat:
+						'\\[?[a-zA-Z0-57-9-/_]+\\]?',
+				},
+			],
+
+			'import/exports-last': ['error'],
+
+			// Always provide an extension, except for packages.
+			// WARN:
+			// Right now, due to how TS works with ESM,
+			//  any ".ts" files import with the ".js" extension.
+			// That reports an error...
+			// My solution is to not have an extension at all,
+			//  but honestly, this is totally acceptable!
+			'import/extensions': [
+				'error',
+				'ignorePackages',
+				{
+					ts: 'ignore',
+					tsx: 'ignore',
+					mts: 'ignore',
+				},
+			],
+
+			'import/first': ['error'],
+			'import/group-exports': ['error'],
+
+			// Don't limit the number of dependencies.
+			'import/max-dependencies': ['off'],
+
+			// WARN:
+			// This reports double-newlines after imports.
+			// Our rule for exports ignores double-newlines.
+			'import/newline-after-import': ['error'],
+
+			'import/no-anonymous-default-export': ['error'],
+
+			// Default & Named exports are both fine.
+			'import/no-default-export': ['off'],
+
+			// Have to disable base ESLint rule here.
+			'no-duplicate-imports': ['off'],
+			'import/no-duplicates': ['error'],
+
+			'import/no-named-default': ['error'],
+
+			// Default & Named exports are both fine.
+			'import/no-named-export': ['off'],
+
+			'import/no-namespace': ['error'],
+
+			// In JSX, we can import css for styling
+			//  without assigning anything.
+			'import/no-unassigned-import': [
+				'error',
+				{allow: ['**/*.css']},
+			],
+
+			// Now this is what we came for!
+			// Have to disable base ESLint rule here.
+			'sort-imports': ['off'],
+			'import/order': [
+				'error',
+				{
+					alphabetize: {order: 'asc'},
+					warnOnUnassignedImports: true,
+					groups: [
+						'builtin',
+						'external',
+						['internal', 'parent', 'sibling', 'index'],
+						'object',
+						'type',
+					],
+				},
+			],
+
+			// Default & Named exports are both fine.
+			'import/prefer-default-export': ['off'],
+
+			/*****************************************************
 				ESLint Stylistic Plugin Rules
 			*****************************************************/
 			// Seperate brackets if there are any newlines.
@@ -900,145 +1037,6 @@ const config = [
 				'error',
 				'both',
 			],
-
-
-			/*****************************************************
-				ESLint Import Plugin Rules
-			*****************************************************/
-			/* STATIC ANALYSIS */
-			'import/no-absolute-path': ['error'],
-			'import/no-cycle': ['error'],
-			'import/no-dynamic-require': ['error'],
-
-			// QUESTION:
-			// Have some internal modules that are off-limits?
-			// Maybe you're refactoring or have distribution dirs?
-			// This rule can forbid certain internal import paths.
-			'import/no-internal-modules': ['off'],
-
-			// Usually it is better to *prefer* relative packages.
-			'import/no-relative-packages': ['off'],
-
-			// QUESTION:
-			// Do you have a confusing graph-like codebase?
-			// To refactor/simplify it, consider using this rule.
-			'import/no-relative-parent-imports': ['off'],
-
-			// QUESTION:
-			// Do you have incompatible code in your codebase?
-			// If you do, maybe it would be worth using this?
-			'import/no-restricted-paths': ['off'],
-
-			'import/no-self-import': ['error'],
-			'import/no-useless-path-segments': ['error'],
-			'import/no-webpack-loader-syntax': ['error'],
-
-			/* HELPFUL WARNINGS */
-			'import/no-deprecated': ['error'],
-			'import/no-empty-named-blocks': ['error'],
-			'import/no-extraneous-dependencies': ['error'],
-			'import/no-mutable-exports': ['error'],
-			'import/no-unused-modules': ['error'],
-
-			/* MODULE SYSTEMS */
-			'import/no-amd': ['error'],
-			'import/no-commonjs': ['error'],
-			'import/no-import-module-exports': ['error'],
-
-			// QUESTION:
-			// Are you coding for a web project?
-			// If so, you will want to enable this.
-			'import/no-nodejs-modules': ['off'],
-
-			'import/unambiguous': ['error'],
-
-			/* STYLE GUIDE */
-			'import/consistent-type-specifier-style': ['error'],
-
-			// Added a custom chunkname format to explicitly
-			//  allow for dynamic chunknames.
-			'import/dynamic-import-chunkname': [
-				'error',
-				{
-					webpackChunknameFormat:
-						'\\[?[a-zA-Z0-57-9-/_]+\\]?',
-				},
-			],
-
-			'import/exports-last': ['error'],
-
-			// Always provide an extension, except for packages.
-			// WARN:
-			// Right now, due to how TS works with ESM,
-			//  any ".ts" files import with the ".js" extension.
-			// That reports an error...
-			// My solution is to not have an extension at all,
-			//  but honestly, this is totally acceptable!
-			'import/extensions': [
-				'error',
-				'ignorePackages',
-				{
-					ts: 'ignore',
-					tsx: 'ignore',
-					mts: 'ignore',
-				},
-			],
-
-			'import/first': ['error'],
-			'import/group-exports': ['error'],
-
-			// Don't limit the number of dependencies.
-			'import/max-dependencies': ['off'],
-
-			// WARN:
-			// This reports double-newlines after imports.
-			// Our rule for exports ignores double-newlines.
-			'import/newline-after-import': ['error'],
-
-			'import/no-anonymous-default-export': ['error'],
-
-			// Default & Named exports are both fine.
-			'import/no-default-export': ['off'],
-
-			// Have to disable base ESLint rule here.
-			'no-duplicate-imports': ['off'],
-			'import/no-duplicates': ['error'],
-
-			'import/no-named-default': ['error'],
-
-			// Default & Named exports are both fine.
-			'import/no-named-export': ['off'],
-
-			'import/no-namespace': ['error'],
-
-			// In JSX, we can import css for styling
-			//  without assigning anything.
-			'import/no-unassigned-import': [
-				'error',
-				{allow: ['**/*.css']},
-			],
-
-			// Now this is what we came for!
-			// Have to disable base ESLint rule here.
-			'sort-imports': ['off'],
-			'import/order': [
-				'error',
-				{
-					alphabetize: {order: 'asc'},
-					warnOnUnassignedImports: true,
-					groups: [
-						'builtin',
-						'external',
-						['internal', 'parent', 'sibling', 'index'],
-						'object',
-						'type',
-					],
-				},
-			],
-
-			// Default & Named exports are both fine.
-			'import/prefer-default-export': ['off'],
-
 		},
 	},
 ]
