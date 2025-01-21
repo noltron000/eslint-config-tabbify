@@ -1,18 +1,57 @@
-/* eslint-disable max-lines */
+/* eslint max-lines: 0 */
 
-import {fixupPluginRules} from '@eslint/compat'
-import _import from 'eslint-plugin-import'
+import stylisticPlugin from '@stylistic/eslint-plugin'
+import eslintPlugin from 'eslint-plugin-eslint-plugin'
+import importPlugin from 'eslint-plugin-import'
+import nodePlugin from 'eslint-plugin-n'
 
 const config = [
+	/*
+	ESLINT META-PLUGIN
+	==================
+	> https://www.npmjs.com/package/eslint-plugin-eslint-plugin
+	Explicitly follow the convention for the default rules!
+	Here, `eslintPlugin.configs/['flat/recommended']` is
+		the conventional way to enable recommneded rules.
+	It will help lint ESLint plugins, like this file.
+	*/
+	eslintPlugin.configs['flat/recommended'],
+
+	/*
+	NODE PLUGIN
+	===========
+	> https://www.npmjs.com/package/eslint-plugin-n
+	Most of the recommended node plugin convention is followed
+		save for a few rules that were particularly bothersome.
+	This will help lint node environments, like this file.
+	*/
+	nodePlugin.configs['flat/recommended'],
+
+	/*
+	IMPORT PLUGIN
+	=============
+	> https://www.npmjs.com/package/eslint-plugin-import
+	The documentation for this one is a little outdated.
+	However, the rules are the same, and followed to the T.
+	*/
+	importPlugin.flatConfigs.recommended,
+	importPlugin.flatConfigs.typescript,
+
 	{
-		plugins: {import: fixupPluginRules(_import)},
+		languageOptions: {
+			sourceType: 'module', // ESLint requires this!
+			ecmaVersion: 'latest',
+		},
+
+		plugins: {
+			'n': nodePlugin,
+			'@stylistic': stylisticPlugin,
+		},
 
 		rules: {
-			/** ***************************************************
-			** BASE ESLINT RULES                                 **
-			**************************************************** */
-
-			/* FIXES FOR POSSIBLE PROBLEMS */
+			/*****************************************************
+				Core ESLint Rules
+			*****************************************************/
 			// This rule can report false-positives.
 			'array-callback-return': ['off'],
 
@@ -68,7 +107,7 @@ const config = [
 			'no-irregular-whitespace': ['error'],
 			'no-loss-of-precision': ['error'],
 			'no-misleading-character-class': ['error'],
-			'no-new-symbol': ['error'],
+			'no-new-native-nonconstructor': ['error'],
 			'no-obj-calls': ['error'],
 			'no-promise-executor-return': ['error'],
 			'no-prototype-builtins': ['error'],
@@ -91,7 +130,8 @@ const config = [
 			'no-unreachable-loop': ['error'],
 			'no-unsafe-finally': ['error'],
 
-			// Check for unclear negation with relational operators.
+			// Check for unclear negation
+			//  when using relational operators.
 			'no-unsafe-negation': [
 				'error',
 				{enforceForOrderingRelations: true},
@@ -106,8 +146,8 @@ const config = [
 			'no-unused-private-class-members': ['error'],
 
 			// Allow omission of properties from a spread object.
-			// Also, sometimes its good to explicitly set expected args,
-			// 	even if they remain unused in the function's body.
+			// Also, sometimes its good to explicitly name args,
+			//  even if they remain unused in the function's body.
 			'no-unused-vars': [
 				'error',
 				{args: 'none', ignoreRestSiblings: true},
@@ -147,7 +187,8 @@ const config = [
 			'default-param-last': ['error'],
 			'dot-notation': ['error'],
 
-			// Use triple equals except when comparing null loosely.
+			// Use triple equals,
+			//  except when loosely comparing null.
 			'eqeqeq': [
 				'error',
 				'always',
@@ -184,6 +225,13 @@ const config = [
 
 			// Allow for gated declarations "let x; if (y) x=4".
 			'init-declarations': ['off'],
+
+			// Consistent use of `??=`, `&&`, etc.
+			'logical-assignment-operators': [
+				'error',
+				'always',
+				{enforceForIfStatements: true},
+			],
 
 			// Enforce arbitrarily-set maxes of certain patterns.
 			'max-classes-per-file': [
@@ -228,9 +276,6 @@ const config = [
 				{max: 30},
 			],
 
-			// These options for comments really aren't attractive.
-			'multiline-comment-style': ['off'],
-
 			'new-cap': ['error'],
 			'no-alert': ['error'],
 			'no-array-constructor': ['error'],
@@ -238,16 +283,18 @@ const config = [
 			'no-caller': ['error'],
 			'no-case-declarations': ['error'],
 
-			// This marks parenthesis as "less confusing".
-			'no-confusing-arrow': [
-				'error',
-				{allowParens: true},
-			],
-
 			// Keep some console methods, but log is evil!
 			'no-console': [
 				'error',
-				{allow: ['clear', 'info', 'warn', 'error', 'table']},
+				{
+					allow: [
+						'clear',
+						'info',
+						'warn',
+						'error',
+						'table',
+					],
+				},
 			],
 
 			'no-continue': ['error'],
@@ -259,6 +306,7 @@ const config = [
 
 			'no-empty': ['error'],
 			'no-empty-function': ['error'],
+			'no-empty-static-block': ['error'],
 
 			// Use the "eqeqeq" rule instead.
 			'no-eq-null': ['off'],
@@ -268,8 +316,6 @@ const config = [
 			'no-extra-bind': ['error'],
 			'no-extra-boolean-cast': ['error'],
 			'no-extra-label': ['error'],
-			'no-extra-semi': ['error'],
-			'no-floating-decimal': ['error'],
 			'no-global-assign': ['error'],
 
 			// Shorthand boolean coercion is fine.
@@ -299,11 +345,11 @@ const config = [
 			// This turned out to be supremely annoying.
 			'no-magic-numbers': ['off'],
 
-			'no-mixed-operators': ['error'],
 			'no-multi-assign': ['error'],
 			'no-multi-str': ['error'],
 
-			// Disable for things like "if (variable != null) {...}"
+			// Disable for things like
+			//  `if (variable != null) {...}`
 			// TODO:
 			// Is this worth a warning?
 			'no-negated-condition': ['off'],
@@ -317,9 +363,9 @@ const config = [
 			'no-new': ['off'],
 
 			'no-new-func': ['error'],
-			'no-new-object': ['error'],
 			'no-new-wrappers': ['error'],
 			'no-nonoctal-decimal-escape': ['error'],
+			'no-object-constructor': ['error'],
 			'no-octal': ['error'],
 			'no-octal-escape': ['error'],
 
@@ -339,10 +385,6 @@ const config = [
 			'no-restricted-syntax': ['off'],
 
 			'no-return-assign': ['error'],
-
-			// We expect to await items in async.
-			'no-return-await': ['off'],
-
 			'no-script-url': ['error'],
 			'no-sequences': ['error'],
 
@@ -371,6 +413,7 @@ const config = [
 			],
 
 			'no-unused-labels': ['error'],
+			'no-useless-assignment': ['error'],
 			'no-useless-call': ['error'],
 			'no-useless-catch': ['error'],
 			'no-useless-computed-key': ['error'],
@@ -381,7 +424,8 @@ const config = [
 			'no-useless-return': ['error'],
 			'no-var': ['error'],
 
-			// We use void to show purposefully unawaited async calls.
+			// We use void to indicate
+			//  intentionally unawaited async calls.
 			'no-void': ['off'],
 
 			// Useless.
@@ -401,18 +445,12 @@ const config = [
 				'never',
 			],
 
-			// Also simpler here.
-			'one-var-declaration-per-line': [
-				'error',
-				'always',
-			],
-
 			'operator-assignment': ['error'],
 			'prefer-arrow-callback': ['error'],
 			'prefer-const': ['error'],
 
-			// If we want to explicitly typify a var (as in TypeScript),
-			// 	we'd have to ignore this rule first.
+			// If we want to typify a var (as in TypeScript),
+			//  we'd have to ignore this rule first.
 			// TODO:
 			// Could be worth warning.
 			'prefer-destructuring': ['off'],
@@ -428,24 +466,16 @@ const config = [
 			'prefer-spread': ['error'],
 			'prefer-template': ['error'],
 
-			// NOTICE
-			// Props shouldn't have quotes if not needed.
-			// They should be consistent if they are, however.
-			'quote-props': [
-				'error',
-				'consistent-as-needed',
-			],
-
 			// Don't complicate parseInt unless its needed.
 			'radix': [
 				'error',
 				'as-needed',
 			],
 
-			// This is counter-intuitive when async functions are used
-			//  as helpers that throw errors.
+			// This is counter-intuitive when async functions
+			//  are used as helpers that throw errors.
 			// TODO:
-			// Find an alternative that requires await --OR-- throw.
+			// Find an alternative that requires await OR throw.
 			'require-await': ['off'],
 
 			'require-unicode-regexp': ['error'],
@@ -459,202 +489,316 @@ const config = [
 			'sort-keys': ['off'],
 			'sort-vars': ['off'],
 
-			// Should have spaced block comments as well.
-			// There are some exceptions for js-doc and ts-directives.
-			'spaced-comment': [
-				'error',
-				'always',
-				{
-					line: {markers: ['/']},
-					block: {
-						balanced: true,
-						markers: ['*'],
-					},
-				},
-			],
-
 			'strict': ['error'],
 			'symbol-description': ['error'],
+			'unicode-bom': ['error'],
 			'vars-on-top': ['error'],
 			'yoda': ['error'],
 
-			/* STYLISTIC FIXES FOR LAYOUT & FORMATTING */
+			/*****************************************************
+				ESLint Meta-Plugin Rules
+			*****************************************************/
+			// No additional rules are set for the core plugin!
+
+			/*****************************************************
+				ESLint Node Plugin Rules
+			*****************************************************/
+			// This lints node import in a nice way.
+			// For example: `import fs from 'node:fs'`.
+			'n/prefer-node-protocol': ['error'],
+
+			/*****************************************************
+				ESLint Stylistic Plugin Rules
+			*****************************************************/
 			// Seperate brackets if there are any newlines.
-			'array-bracket-newline': [
+			'@stylistic/array-bracket-newline': [
 				'error',
 				{multiline: true},
 			],
 
 			// Always use spacing between ( ), [ ], and { }.
 			// Otherwise there shouldn't be any space-padding.
-			'array-bracket-spacing': [
+			'@stylistic/array-bracket-spacing': [
 				'error',
 				'never',
 			],
 
 			// Keep newlines consistent on a per-array basis.
-			'array-element-newline': [
+			'@stylistic/array-element-newline': [
 				'error',
 				'consistent',
 			],
 
-			'arrow-parens': ['error'],
-			'arrow-spacing': ['error'],
-			'block-spacing': ['error'],
+			'@stylistic/arrow-parens': ['error'],
+			'@stylistic/arrow-spacing': ['error'],
+			'@stylistic/block-spacing': ['error'],
 
 			// Stroustrup is the best brace style!!!
-			'brace-style': [
+			'@stylistic/brace-style': [
 				'error',
 				'stroustrup',
 			],
 
 			// This is best for diff churn.
-			'comma-dangle': [
+			'@stylistic/comma-dangle': [
 				'error',
 				'always-multiline',
 			],
 
-			'comma-spacing': ['error'],
-			'comma-style': ['error'],
+			'@stylistic/comma-spacing': ['error'],
+			'@stylistic/comma-style': ['error'],
 
 			// Always use spacing between ( ), [ ], and { }.
 			// Otherwise there shouldn't be any space-padding.
-			'computed-property-spacing': [
+			'@stylistic/computed-property-spacing': [
 				'error',
 				'never',
 			],
 
+			'@stylistic/curly-newline': [
+				'error',
+				{multiline: true},
+			],
+
 			// Start newlines with operators where applicable.
-			'dot-location': [
+			'@stylistic/dot-location': [
 				'error',
 				'property',
 			],
 
-			'eol-last': ['error'],
-			'func-call-spacing': ['error'],
+			'@stylistic/eol-last': ['error'],
+			'@stylistic/func-call-spacing': ['error'],
 
-			'function-call-argument-newline': [
+			'@stylistic/function-call-argument-newline': [
 				'error',
 				'consistent',
 			],
 
+			'@stylistic/function-call-spacing': ['error'],
+
 			// Seperate parens if there are any newlines.
-			'function-paren-newline': [
+			'@stylistic/function-paren-newline': [
 				'error',
 				'multiline-arguments',
 			],
 
 			// Space it like you would "async"
-			'generator-star-spacing': [
+			'@stylistic/generator-star-spacing': [
 				'error',
 				'both',
 			],
 
-			'implicit-arrow-linebreak': ['error'],
+			'@stylistic/implicit-arrow-linebreak': ['error'],
 
 			// We use tabs! And, don't indent member expressions!
-			'indent': [
+			'@stylistic/indent': [
 				'error',
 				'tab',
 				{SwitchCase: 1, MemberExpression: 0},
 			],
 
+			// We require 0 extra spaces for binary ops!
+			// NOTE: Check if this works as expected.....
+			'@stylistic/indent-binary-ops': ['error', 0],
+
+			'@stylistic/jsx-child-element-spacing': ['off'],
+
+			'@stylistic/jsx-closing-bracket-location': ['error'],
+			'@stylistic/jsx-closing-tag-location': ['error'],
+
+			// The docs recommend this configuration.
+			'@stylistic/jsx-curly-brace-presence': [
+				'error',
+				{
+					props: 'never',
+					children: 'never',
+					propElementValues: 'always',
+				},
+			],
+
+			'@stylistic/jsx-curly-newline': ['error'],
+			'@stylistic/jsx-curly-spacing': ['error'],
+
+			// All binary operators require spacing, inc. equals.
+			'@stylistic/jsx-equals-spacing': ['error', 'always'],
+
+			// Props should only be on one line if the closing
+			//   bracket is also on the same line.
+			'@stylistic/jsx-first-prop-new-line': ['error', 'multiline'],
+
+			'@stylistic/jsx-function-call-newline': ['error'],
+			'@stylistic/jsx-indent': ['error', 'tab'], // We use tabs.
+			'@stylistic/jsx-indent-props': ['error', 'tab'], // We use tabs.
+			'@stylistic/jsx-max-props-per-line': ['off'], // Ruled by line length.
+
+			'@stylistic/jsx-newline': ['warn'], // TODO: Unknown if this is useful!!!
+			'@stylistic/jsx-one-expression-per-line': ['warn'], // TODO: Determine!!!
+
+			'@stylistic/jsx-pascal-case': ['error'],
+			'@stylistic/jsx-props-no-multi-spaces': ['error'],
+
 			// Prefer single-quotes wherever possible!
-			'jsx-quotes': [
+			'@stylistic/jsx-quotes': [
 				'error',
 				'prefer-single',
 			],
 
-			'key-spacing': ['error'],
-			'keyword-spacing': ['error'],
+			'@stylistic/jsx-self-closing-comp': ['error'],
+
+			// TODO: This needs specific configuration.
+			'@stylistic/jsx-sort-props': ['off'],
+
+			// TODO: This needs specific configuration.
+			'@stylistic/jsx-tag-spacing': [
+				'error', {
+					closingSlash: 'never',
+					beforeSelfClosing: 'always',
+					afterOpening: 'never',
+					beforeClosing: 'never',
+				},
+			],
+
+			// Newline parens makes the code very clean looking!
+			'@stylistic/jsx-wrap-multilines': [
+				'error',
+				{
+					declaration: 'parens-new-line',
+					assignment: 'parens-new-line',
+					return: 'parens-new-line',
+					arrow: 'parens-new-line',
+					condition: 'ignore',
+					logical: 'ignore',
+					prop: 'ignore',
+					propertyValue: 'ignore',
+				},
+			],
+
+			'@stylistic/key-spacing': ['error'],
+			'@stylistic/keyword-spacing': ['error'],
 
 			// Nope. We don't dictate how comments should work.
-			'line-comment-position': ['off'],
+			'@stylistic/line-comment-position': ['off'],
 
-			'linebreak-style': ['error'],
+			'@stylistic/linebreak-style': ['error'],
 
 			// Nope again.
-			'lines-around-comment': ['off'],
+			'@stylistic/lines-around-comment': ['off'],
 
-			'lines-between-class-members': ['error'],
+			'@stylistic/lines-between-class-members': ['error'],
 
 			// The max is 90, but its also recommended to keep
-			// 	line-length below 60 if its feasible to do so.
-			'max-len': [
+			//  line-length below 60 if its feasible to do so.
+			'@stylistic/max-len': [
 				'error',
 				{code: 90, tabWidth: 2},
 			],
 
-			'max-statements-per-line': ['error'],
+			'@stylistic/max-statements-per-line': ['error'],
+
+			// Types and Interfaces are delimited by commas!!!
+			'@stylistic/member-delimiter-style': [
+				'error',
+				{
+					multiline: {
+						delimiter: 'comma',
+						requireLast: true,
+					},
+					singleline: {
+						delimiter: 'comma',
+						requireLast: false,
+					},
+					multilineDetection: 'brackets',
+				},
+			],
+
+			// No comment style nits here.
+			// The options for comments really aren't attractive.
+			'@stylistic/multiline-comment-style': ['off'],
 
 			// Allow multiline ternaries if there's newlines.
-			'multiline-ternary': [
+			'@stylistic/multiline-ternary': [
 				'error',
 				'always-multiline',
 			],
 
-			'new-parens': ['error'],
-			'newline-per-chained-call': ['error'],
+			'@stylistic/new-parens': ['error'],
+			'@stylistic/newline-per-chained-call': ['error'],
+			'@stylistic/no-confusing-arrow': ['error'],
 
-			// Unfortunately, this doesn't provide the config I'd like.
+			// Sadly, this doesn't provide the config I'd like.
 			// It affects implicit returns in arrow functions.
 			// TODO:
-			// Find an alternative config option that suites this need.
-			'no-extra-parens': ['off'],
+			// Get alternative config options for this need.
+			'@stylistic/no-extra-parens': ['off'],
 
-			'no-mixed-spaces-and-tabs': ['error'],
-			'no-multi-spaces': ['error'],
+			'@stylistic/no-extra-semi': ['error'],
+			'@stylistic/no-floating-decimal': ['error'],
+			'@stylistic/no-mixed-operators': ['error'],
+			'@stylistic/no-mixed-spaces-and-tabs': ['error'],
+			'@stylistic/no-multi-spaces': ['error'],
 
 			// Double-newlines are good for seperating stuff.
-			'no-multiple-empty-lines': [
+			'@stylistic/no-multiple-empty-lines': [
 				'error',
-				{max: 2, maxBOF: 0, maxEOF: 0},
+				{
+					max: 2,
+					maxBOF: 0,
+					maxEOF: 1,
+				},
 			],
 
 			// Shouldn't mix tabs with inner-code.
 			// Just use the character exclusively as indentation.
-			'no-tabs': [
-				'error',
+			// At times, this triggers in comments - which is OK.
+			'@stylistic/no-tabs': [
+				'warn',
 				{allowIndentationTabs: true},
 			],
 
-			'no-trailing-spaces': ['error'],
-			'no-whitespace-before-property': ['error'],
-			'nonblock-statement-body-position': ['error'],
+			'@stylistic/no-trailing-spaces': ['error'],
+			'@stylistic/no-whitespace-before-property': ['error'],
+			'@stylistic/nonblock-statement-body-position': ['error'],
 
 			// Keep newlines consistent on a per-object basis.
-			'object-curly-newline': [
+			'@stylistic/object-curly-newline': [
 				'error',
 				{multiline: true},
 			],
 
 			// Always use spacing between ( ), [ ], and { }.
 			// Otherwise there shouldn't be any space-padding.
-			'object-curly-spacing': [
+			'@stylistic/object-curly-spacing': [
 				'error',
 				'never',
 			],
 
 			// Keep multiline properties on own lines.
-			'object-property-newline': [
+			'@stylistic/object-property-newline': [
 				'error',
 				{allowAllPropertiesOnSameLine: true},
 			],
 
+			// Realistically, this shouldn't be allowed at all!
+			// Should entirely disallow `let a, b, c` and such.
+			'@stylistic/one-var-declaration-per-line': [
+				'error',
+				'always',
+			],
+
 			// Start lines with operators where applicable.
-			'operator-linebreak': [
+			'@stylistic/operator-linebreak': [
 				'error',
 				'before',
 			],
 
 			// Gross...
-			'padded-blocks': [
+			'@stylistic/padded-blocks': [
 				'error',
 				'never',
 			],
 
 			// Always a space before the first export.
-			'padding-line-between-statements': [
+			'@stylistic/padding-line-between-statements': [
 				'error',
 				{
 					prev: '*',
@@ -668,115 +812,132 @@ const config = [
 				},
 			],
 
+			// NOTICE
+			// Props shouldn't have quotes if not needed.
+			// They should be consistent if they are, however.
+			'@stylistic/quote-props': [
+				'error',
+				'consistent-as-needed',
+			],
+
 			// Single Quotes FTW!
-			'quotes': [
+			'@stylistic/quotes': [
 				'error',
 				'single',
 			],
 
-			'rest-spread-spacing': ['error'],
+			'@stylistic/rest-spread-spacing': ['error'],
 
 			// Ew... No semis!
-			'semi': [
+			'@stylistic/semi': [
 				'error',
 				'never',
 				{beforeStatementContinuationChars: 'never'},
 			],
 
-			'semi-spacing': ['error'],
-			'semi-style': ['error'],
-			'space-before-blocks': ['error'],
-			'space-before-function-paren': ['error'],
+			'@stylistic/semi-spacing': ['error'],
+			'@stylistic/semi-style': ['error'],
+			'@stylistic/space-before-blocks': ['error'],
+			'@stylistic/space-before-function-paren': ['error'],
 
 			// Always use spacing between ( ), [ ], and { }.
 			// Otherwise there shouldn't be any space-padding.
-			'space-in-parens': [
+			'@stylistic/space-in-parens': [
 				'error',
 				'never',
 				{exceptions: ['empty']},
 			],
 
-			'space-infix-ops': ['error'],
-			'space-unary-ops': ['error'],
-			'switch-colon-spacing': ['error'],
+			'@stylistic/space-infix-ops': ['error'],
+			'@stylistic/space-unary-ops': ['error'],
+
+			// Should have spaced block comments as well.
+			// Has exceptions for js-doc and ts-directives.
+			// TODO:
+			// Test if this is really what I want?
+			'@stylistic/spaced-comment': [
+				'error',
+				'always',
+				{
+					line: {markers: ['/']},
+					block: {
+						markers: ['*'],
+						exceptions: ['*'],
+						balanced: true,
+					},
+				},
+			],
+
+			'@stylistic/switch-colon-spacing': ['error'],
 
 			// Always use spacing between ( ), [ ], and { }.
 			// Otherwise there shouldn't be any space-padding.
-			'template-curly-spacing': [
+			'@stylistic/template-curly-spacing': [
 				'error',
 				'never',
 			],
 
 			// Tags are like "gql`Query {...`", with no spaces.
-			'template-tag-spacing': [
+			'@stylistic/template-tag-spacing': [
 				'error',
 				'never',
 			],
 
-			'unicode-bom': ['error'],
+			'@stylistic/type-annotation-spacing': ['error'],
+			'@stylistic/type-generic-spacing': ['error'],
+			'@stylistic/type-named-tuple-spacing': ['error'],
 
 			// Inside option gives better readability.
-			'wrap-iife': [
+			'@stylistic/wrap-iife': [
 				'error',
 				'inside',
 			],
 
-			'wrap-regex': ['error'],
+			'@stylistic/wrap-regex': ['error'],
 
 			// Consistent with "generator-star-spacing"
-			'yield-star-spacing': [
+			'@stylistic/yield-star-spacing': [
 				'error',
 				'both',
 			],
 
-			/** *****************************************************
-			** IMPORT PLUGIN RULES                                **
-			****************************************************** */
 
+			/*****************************************************
+				ESLint Import Plugin Rules
+			*****************************************************/
 			/* STATIC ANALYSIS */
-			'import/default': ['error'],
-			'import/named': ['error'],
-			'import/namespace': ['error'],
 			'import/no-absolute-path': ['error'],
 			'import/no-cycle': ['error'],
 			'import/no-dynamic-require': ['error'],
 
 			// QUESTION:
-			// Are there some internal modules that are off-limits?
-			// Maybe you are refactoring, or have distribution dirs?
+			// Have some internal modules that are off-limits?
+			// Maybe you're refactoring or have distribution dirs?
 			// This rule can forbid certain internal import paths.
 			'import/no-internal-modules': ['off'],
 
-			// Usually it is better to prefer relative packages.
+			// Usually it is better to *prefer* relative packages.
 			'import/no-relative-packages': ['off'],
 
 			// QUESTION:
-			// Do you have a massive, confusing graph-like codebase?
-			// If you want to simplify it, consider using this rule.
+			// Do you have a confusing graph-like codebase?
+			// To refactor/simplify it, consider using this rule.
 			'import/no-relative-parent-imports': ['off'],
 
 			// QUESTION:
-			// Do you have some incompatible code in your codebase?
-			// If you do, maybe it would be worth configuring this?
+			// Do you have incompatible code in your codebase?
+			// If you do, maybe it would be worth using this?
 			'import/no-restricted-paths': ['off'],
 
 			'import/no-self-import': ['error'],
-			'import/no-unresolved': ['error'],
 			'import/no-useless-path-segments': ['error'],
 			'import/no-webpack-loader-syntax': ['error'],
 
 			/* HELPFUL WARNINGS */
-			'import/export': ['error'],
 			'import/no-deprecated': ['error'],
+			'import/no-empty-named-blocks': ['error'],
 			'import/no-extraneous-dependencies': ['error'],
 			'import/no-mutable-exports': ['error'],
-
-			// QUESTION:
-			// Are you upgrading from a Babel version prior to 6?
-			// The docs say this rule could be useful then.
-			'import/no-named-as-default-member': ['off'],
-
-			'import/no-named-as-default': ['error'],
 			'import/no-unused-modules': ['error'],
 
 			/* MODULE SYSTEMS */
@@ -792,11 +953,16 @@ const config = [
 			'import/unambiguous': ['error'],
 
 			/* STYLE GUIDE */
+			'import/consistent-type-specifier-style': ['error'],
 
-			// Added a custom chunkname format to explicitly allow for dynamic chunknames.
+			// Added a custom chunkname format to explicitly
+			//  allow for dynamic chunknames.
 			'import/dynamic-import-chunkname': [
 				'error',
-				{webpackChunknameFormat: '\\[?[a-zA-Z0-57-9-/_]+\\]?'},
+				{
+					webpackChunknameFormat:
+						'\\[?[a-zA-Z0-57-9-/_]+\\]?',
+				},
 			],
 
 			'import/exports-last': ['error'],
@@ -804,12 +970,18 @@ const config = [
 			// Always provide an extension, except for packages.
 			// WARN:
 			// Right now, due to how TS works with ESM,
-			// 	any ".ts" files import with the ".js" extension.
-			// That reports an error so we need to ignore ts files.
+			//  any ".ts" files import with the ".js" extension.
+			// That reports an error...
+			// My solution is to not have an extension at all,
+			//  but honestly, this is totally acceptable!
 			'import/extensions': [
 				'error',
 				'ignorePackages',
-				{ts: 'ignore', tsx: 'ignore'},
+				{
+					ts: 'ignore',
+					tsx: 'ignore',
+					mts: 'ignore',
+				},
 			],
 
 			'import/first': ['error'],
@@ -820,7 +992,7 @@ const config = [
 
 			// WARN:
 			// This reports double-newlines after imports.
-			// Our rule for exporst ignores double-newlines.
+			// Our rule for exports ignores double-newlines.
 			'import/newline-after-import': ['error'],
 
 			'import/no-anonymous-default-export': ['error'],
@@ -839,7 +1011,8 @@ const config = [
 
 			'import/no-namespace': ['error'],
 
-			// In JSX, we can import css for styling without assigning anything.
+			// In JSX, we can import css for styling
+			//  without assigning anything.
 			'import/no-unassigned-import': [
 				'error',
 				{allow: ['**/*.css']},
@@ -853,11 +1026,19 @@ const config = [
 				{
 					alphabetize: {order: 'asc'},
 					warnOnUnassignedImports: true,
+					groups: [
+						'builtin',
+						'external',
+						['internal', 'parent', 'sibling', 'index'],
+						'object',
+						'type',
+					],
 				},
 			],
 
 			// Default & Named exports are both fine.
 			'import/prefer-default-export': ['off'],
+
 		},
 	},
 ]
