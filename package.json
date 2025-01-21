@@ -2,8 +2,8 @@
 	"name": "eslint-config-tabbify",
 	"private": false,
 	"license": "MIT",
-	"version": "0.1.12",
-	"description": "Base linter configs for the opinionated JavaScript style guide, Tabbify.",
+	"version": "0.3.0",
+	"description": "Linter config for the opinionated JavaScript style guide, Tabbify.",
 	"keywords": [
 		"ESLint",
 		"ESLintConfig",
@@ -28,13 +28,24 @@
 		"url": "https://noltron000.com/"
 	},
 	"contributors": [ ],
-	"packageManager": "yarn@3.2.1",
-	"main": ".eslintrc.json",
-	"type": "commonjs",
-	"dependencies": { },
-	"devDependencies": { },
+	"engines": {
+		"node": ">=22"
+	},
+	"main": "eslint.config.mjs",
+	"type": "module",
+	"packageManager": "yarn@4.6.0",
+	"dependencies": {
+		"@eslint/compat": "^1.2.4",
+		"@eslint/js": "^9.18.0",
+		"@stylistic/eslint-plugin": "^2.12.1",
+		"eslint-plugin-eslint-plugin": "^6.4.0",
+		"eslint-plugin-import": "^2.31.0",
+		"eslint-plugin-n": "^17.15.1"
+	},
+	"devDependencies": {
+		"eslint": "^9.18.0"
+	},
 	"peerDependencies": {
-		"eslint": ">=8",
-		"eslint-plugin-import": ">=2"
+		"eslint": ">=9.18"
 	}
 }
