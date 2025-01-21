@@ -218,7 +218,9 @@ const config = [
 			// No need to restrict variable names.
 			'id-denylist': ['off'],
 
-			'id-length': ['error'],
+			// Stupid properties option was automatically on.
+			// Some of these are unavoidable in libraries y'know.
+			'id-length': ['warn', {properties: 'never'}],
 
 			// Already using camelCase. No need to configure here.
 			'id-match': ['off'],
@@ -249,13 +251,13 @@ const config = [
 			'max-lines': [
 				'error',
 				// Default 300
-				{max: 300},
+				{max: 360},
 			],
 
 			'max-lines-per-function': [
 				'error',
 				// Default 50
-				{max: 60},
+				{max: 120},
 			],
 
 			'max-nested-callbacks': [
@@ -461,7 +463,10 @@ const config = [
 			'prefer-object-has-own': ['error'],
 			'prefer-object-spread': ['error'],
 			'prefer-promise-reject-errors': ['error'],
-			'prefer-regex-literals': ['error'],
+
+			// I prefer regex constructors!
+			'prefer-regex-literals': ['off'],
+
 			'prefer-rest-params': ['error'],
 			'prefer-spread': ['error'],
 			'prefer-template': ['error'],
@@ -507,6 +512,17 @@ const config = [
 			// For example: `import fs from 'node:fs'`.
 			'n/prefer-node-protocol': ['error'],
 
+			// Yikes. This just wasn't working right!
+			// It expected `.js` extensions instead of none.
+			'n/no-missing-import': ['off'],
+
+			// This needs to be allowed for things like for
+			//  `localStorage` in my NextJS Static Page Generator.
+			'n/no-unsupported-features/node-builtins': [
+				'error',
+				{allowExperimental: true},
+			],
+
 			/*****************************************************
 				ESLint Import Plugin Rules
 			*****************************************************/
@@ -543,6 +559,11 @@ const config = [
 			'import/no-empty-named-blocks': ['error'],
 			'import/no-extraneous-dependencies': ['error'],
 			'import/no-mutable-exports': ['error'],
+
+			// This was a headache and a half! Turn it OFF!!!
+			// TypeScript and other ESLint rules do this already.
+			'import/no-unresolved': ['off'],
+
 			'import/no-unused-modules': ['error'],
 
 			/* MODULE SYSTEMS */
@@ -618,9 +639,16 @@ const config = [
 
 			// In JSX, we can import css for styling
 			//  without assigning anything.
+			// The `module` keyword implies its not global!
 			'import/no-unassigned-import': [
 				'error',
-				{allow: ['**/*.css']},
+				{
+					allow: [
+						'**/*!(.module).css',
+						'**/*!(.module).scss',
+						'**/*!(.module).sass',
+					],
+				},
 			],
 
 			// Now this is what we came for!
@@ -653,12 +681,9 @@ const config = [
 				{multiline: true},
 			],
 
-			// Always use spacing between ( ), [ ], and { }.
-			// Otherwise there shouldn't be any space-padding.
-			'@stylistic/array-bracket-spacing': [
-				'error',
-				'never',
-			],
+			// This doesn't allow empty brackets with a space!
+			// We use `[ ]`, `{ }`, and `( )` for empty pairs.
+			'@stylistic/array-bracket-spacing': ['off'],
 
 			// Keep newlines consistent on a per-array basis.
 			'@stylistic/array-element-newline': [
@@ -668,7 +693,12 @@ const config = [
 
 			'@stylistic/arrow-parens': ['error'],
 			'@stylistic/arrow-spacing': ['error'],
-			'@stylistic/block-spacing': ['error'],
+
+			// Don't ever add a space between my braces...!
+			'@stylistic/block-spacing': [
+				'error',
+				'never',
+			],
 
 			// Stroustrup is the best brace style!!!
 			'@stylistic/brace-style': [
@@ -692,10 +722,12 @@ const config = [
 				'never',
 			],
 
+			// Yikes! Only need a new line if another is new line.
 			'@stylistic/curly-newline': [
 				'error',
-				{multiline: true},
+				{consistent: true},
 			],
+
 
 			// Start newlines with operators where applicable.
 			'@stylistic/dot-location': [
@@ -734,11 +766,9 @@ const config = [
 				{SwitchCase: 1, MemberExpression: 0},
 			],
 
-			// We require 0 extra spaces for binary ops!
-			// NOTE: Check if this works as expected.....
-			'@stylistic/indent-binary-ops': ['error', 0],
-
-			'@stylistic/jsx-child-element-spacing': ['off'],
+			// This does not work with binary ops in parens! Boo!!
+			'@stylistic/indent-binary-ops': ['off'],
+			'@stylistic/jsx-child-element-spacing': ['off'], // No
 
 			'@stylistic/jsx-closing-bracket-location': ['error'],
 			'@stylistic/jsx-closing-tag-location': ['error'],
@@ -768,8 +798,9 @@ const config = [
 			'@stylistic/jsx-indent-props': ['error', 'tab'], // We use tabs.
 			'@stylistic/jsx-max-props-per-line': ['off'], // Ruled by line length.
 
-			'@stylistic/jsx-newline': ['warn'], // TODO: Unknown if this is useful!!!
-			'@stylistic/jsx-one-expression-per-line': ['warn'], // TODO: Determine!!!
+			// Gross! Let's turn these off!
+			'@stylistic/jsx-newline': ['off'],
+			'@stylistic/jsx-one-expression-per-line': ['off'],
 
 			'@stylistic/jsx-pascal-case': ['error'],
 			'@stylistic/jsx-props-no-multi-spaces': ['error'],
@@ -803,10 +834,10 @@ const config = [
 					assignment: 'parens-new-line',
 					return: 'parens-new-line',
 					arrow: 'parens-new-line',
-					condition: 'ignore',
-					logical: 'ignore',
-					prop: 'ignore',
-					propertyValue: 'ignore',
+					condition: 'parens-new-line',
+					logical: 'parens-new-line',
+					prop: 'parens-new-line',
+					propertyValue: 'parens-new-line',
 				},
 			],
 
@@ -899,7 +930,7 @@ const config = [
 			// Keep newlines consistent on a per-object basis.
 			'@stylistic/object-curly-newline': [
 				'error',
-				{multiline: true},
+				{consistent: true},
 			],
 
 			// Always use spacing between ( ), [ ], and { }.

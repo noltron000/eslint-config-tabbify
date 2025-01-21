@@ -2,7 +2,7 @@
 	"name": "eslint-config-tabbify",
 	"private": false,
 	"license": "MIT",
-	"version": "0.3.0",
+	"version": "0.3.2",
 	"description": "Linter config for the opinionated JavaScript style guide, Tabbify.",
 	"keywords": [
 		"ESLint",
